@@ -27,9 +27,15 @@
         </div>
         <div id="dropdown" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/login">Login</a></li>
-                <li><a href="/register">Register</a></li>
-                <li><a href="/logout">Logout</a></li>
+                @if(Auth::check())
+                    <li><a href="/profile/{{ Auth::user()->id }}">My Profile</a></li>
+                    <li><a href="/jobs">Jobs</a></li>
+                    <li><a href="/caregivers">Caregivers</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                @else
+                    <li><a href="/login">Login</a></li>
+                    <li><a href="/register">Register</a></li>
+                @endif
             </ul>
         </div>
     </nav>

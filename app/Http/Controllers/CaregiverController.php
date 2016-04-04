@@ -15,7 +15,12 @@ class CaregiverController extends Controller
      */
     public function index()
     {
-        //
+        $caregivers = \App\Caregiver::all();
+
+        /*foreach($caregivers as $caregiver) {
+            echo $caregiver->bio.'<br>';
+        }*/
+        return view('caregivers')->with('caregivers', $caregivers);
     }
 
     /**
@@ -36,6 +41,9 @@ class CaregiverController extends Controller
      */
     public function store(Request $request)
     {
+        $caregiver = new \App\Caregiver();
+        //TODO: pull from request
+        $caregiver->save();
         //
     }
 
@@ -47,6 +55,7 @@ class CaregiverController extends Controller
      */
     public function show($id)
     {
+        $caregiver = \App\Caregiver::where('id','EQUALS',$id);
         //
     }
 
@@ -58,6 +67,7 @@ class CaregiverController extends Controller
      */
     public function edit($id)
     {
+        $caregiver = \App\Caregiver::where('id','EQUALS',$id);
         //
     }
 
@@ -70,7 +80,9 @@ class CaregiverController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $caregiver = \App\Caregiver::where('id','EQUALS',$id);
+        //TODO: pull from request
+        $caregiver->save();
     }
 
     /**
@@ -81,6 +93,7 @@ class CaregiverController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $caregiver = \App\Caregiver::where('id','EQUALS',$id);
+        $caregiver->delete();
     }
 }
