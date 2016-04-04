@@ -26,6 +26,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies($gate);
 
-        //
+        //only parents can post jobs
+        $gate->define('parent-job', function ($user) {
+            return $user->$isParent;
+        });
+
+        //only caregivers can create profiles
+        $gate->define('caregiver-profile', function ($user) {
+            return !$user->$is_parent;
+        });
     }
 }

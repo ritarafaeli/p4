@@ -34,7 +34,7 @@ class AuthController extends Controller
     protected $loginPath = '/login';
 
     # Where should the user be redirected to after logging out?
-    protected $redirectAfterLogout = '/test';
+    protected $redirectAfterLogout = '/';
 
     /**
      * Create a new authentication controller instance.
@@ -43,7 +43,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->middleware('guest', ['except' => ['logout', 'getLogout']]);
     }
 
     /**

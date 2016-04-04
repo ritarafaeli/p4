@@ -23,7 +23,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a ng-click="setTab(0)" class="navbar-brand">Find A Babysitter</a>
+            <a href="/" class="navbar-brand">Find A Babysitter</a>
         </div>
         <div id="dropdown" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
