@@ -31,8 +31,8 @@
                     <li><a href="/account">My Account</a></li>
                     @if(Auth::user()->is_parent)
                         <li><a href="/caregivers">Caregivers</a></li>
-                        <li><a href="/myjobs">My Jobs</a></li>
-                        <li><a href="/jobs/new">Post New Job</a></li>
+                        <li><a href="/jobs/all">My Jobs</a></li>
+                        <li><a href="/newjob">Post New Job</a></li>
                     @else
                         <li><a href="/profile">My Profile</a></li>
                         <li><a href="/jobs">Jobs</a></li>
@@ -49,7 +49,7 @@
         @yield('content')
     </div>
     <div class="container footer">
-        <span class="glyphicon glyphicon-copyright-mark" aria-hidden="true"></span> <b>Margarita Rafaeli</b>
+
     </div>
 </div>
 

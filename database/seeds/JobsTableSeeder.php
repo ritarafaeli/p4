@@ -11,6 +11,7 @@ class JobsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        //create 30 random jobs from the ModelFactory
+        factory(App\Job::class, 30)->create();
     }
 }

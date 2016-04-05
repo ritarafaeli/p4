@@ -33,11 +33,12 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/profile', 'CaregiverController@update');# Update caregiver profile
 
         #Routes for parents/guardians
-        Route::get('/job/create', function(){ return view('job.create');});# Create new job form
+        Route::get('/newjob', function(){ return view('job.create');});# Show account information TODO: get 'job/create' route working
         Route::post('/job/create', 'JobController@create');# Create new job
         Route::get('/job/edit/{id}', 'JobController@edit');# Edit job form
         Route::post('/job/edit/{id}', 'JobController@update');# Update job
         Route::post('/job/delete/{id}', 'JobController@delete');# Delete job
+        Route::get('/jobs/all', 'JobController@getMyJobs');# Show guardian's list of jobs
         Route::get('/caregivers', 'CaregiverController@index');# Show list of caregivers
         Route::get('/profile/{id}', 'CaregiverController@show');# Show caregiver profile
     });

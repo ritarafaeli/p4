@@ -45,3 +45,19 @@ $factory->define(App\Guardian::class, function (Faker\Generator $faker) use ($fa
         'user_id' => factory(\App\User::class)->create()->id,
     ];
 });
+
+
+$factory->define(App\Job::class, function (Faker\Generator $faker) use ($factory) {
+    return [
+        'parent_id' => factory(\App\Guardian::class)->create()->id,
+        'title' => $faker->text(30),
+        'description' => $faker->text(200),
+        'zip_code' => $faker->numberBetween(10000,99999),
+        'num_children' => $faker->numberBetween(1,5),
+        'is_driver' => $faker->boolean(90),
+        'is_cpr_certified' => $faker->boolean(30),
+        'is_smoker' => $faker->boolean(10),
+        'education_level_id' => factory(\App\UserInput::class)->create()->id,
+        'hourly_rate_id' => factory(\App\UserInput::class)->create()->id,
+    ];
+});

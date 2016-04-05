@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Job extends Model
 {
     public function caregiver(){
-        return $this->belongsTo('\App\Guardian');
+        return $this->hasOne('\App\Guardian');
     }
 }

@@ -51,6 +51,7 @@ class AddTables extends Migration
             $table->timestamps();
             $table->integer('parent_id')->unsigned();
             $table->foreign('parent_id')->references('id')->on('parents');
+            $table->text('title');
             $table->longText('description');
             $table->integer('zip_code');
             $table->integer('num_children');
