@@ -17,9 +17,12 @@ class CaregiverController extends Controller
     {
         $caregivers = \App\Caregiver::all();
 
-        /*foreach($caregivers as $caregiver) {
-            echo $caregiver->bio.'<br>';
-        }*/
+        foreach($caregivers as $caregiver) {
+            $user = \App\User::find($caregiver->user_id);
+            $caregiver->name = $user->name;
+            $caregiver->email = $user->email;
+            $caregiver->profile_picture = $user->profile_picture;
+        }
         return view('caregivers')->with('caregivers', $caregivers);
     }
 
@@ -55,7 +58,7 @@ class CaregiverController extends Controller
      */
     public function show($id)
     {
-        $caregiver = \App\Caregiver::where('id','EQUALS',$id);
+        $caregiver = \App\Caregiver::where('id',$id)->get();
         //
     }
 
@@ -65,10 +68,13 @@ class CaregiverController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        $caregiver = \App\Caregiver::where('id','EQUALS',$id);
-        //
+        $user = Auth::user();
+        if ($user && !$user->is_parent) {
+            $caregiver = \App\Caregiver::where('id',$user->id)->get();
+            return view('profile')->with('caregiver', $caregiver);
+        }
     }
 
     /**
@@ -78,11 +84,14 @@ class CaregiverController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        $caregiver = \App\Caregiver::where('id','EQUALS',$id);
-        //TODO: pull from request
-        $caregiver->save();
+        $user = Auth::user();
+        if ($user && !$user->is_parent) {
+            $caregiver = \App\Caregiver::where('id', $user->id)->get();
+            //TODO: pull from request
+            $caregiver->save();
+        }
     }
 
     /**
@@ -91,9 +100,13 @@ class CaregiverController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy()
     {
-        $caregiver = \App\Caregiver::where('id','EQUALS',$id);
+        $user = Auth::user();
+
+        $caregiver = \App\Caregiver::where('id',$user->id);
         $caregiver->delete();
+
+        $user->delete();
     }
 }

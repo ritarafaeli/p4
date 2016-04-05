@@ -2,25 +2,21 @@
 
 @section('content')
     <h4>Caregivers</h4>
-    @if(isset($caregivers))
-        @foreach($caregivers as $caregiver)
-            <table class="table table-bordered">
-                <tr>
-                    <td>Bio</td>
-                    <td>{{ $caregiver->bio }}</td>
-                </tr>
-                <tr>
-                    <td>CPR Cert</td>
-                    <td>{{ $caregiver->is_cpr_certified }}</td>
-                </tr>
-                <tr>
-                    <td>Driver</td>
-                    <td>{{ $caregiver->is_driver }}</td>
-                </tr>
-
-            </table>
-        @endforeach
-    @else
-        <p>No caregivers to display</p>
-    @endif
+@if(isset($caregivers))
+    <div class="container">
+    @foreach($caregivers as $caregiver)
+        <div class="col-lg-4 col-sm-6 text-center">
+        @if($caregiver->profile_picture != null)
+            <a href="/caregiver/{{ $caregiver->id }}"><img class="img-circle img-responsive img-center" src="{{ $caregiver->profile_picture }}" alt=""></a>
+        @else
+            <a href="/caregiver/{{ $caregiver->id }}"><img class="img-circle img-responsive img-center" src="http://placehold.it/100x100" alt=""></a>
+        @endif
+            <h3>{{ $caregiver->name }}</h3>
+            <p>{{ $caregiver->bio }}</p>
+        </div>
+    @endforeach
+    </div>
+@else
+    <p>No caregivers to display</p>
+@endif
 @stop

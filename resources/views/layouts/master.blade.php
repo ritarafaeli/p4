@@ -28,9 +28,15 @@
         <div id="dropdown" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 @if(Auth::check())
-                    <li><a href="/profile/{{ Auth::user()->id }}">My Profile</a></li>
-                    <li><a href="/jobs">Jobs</a></li>
-                    <li><a href="/caregivers">Caregivers</a></li>
+                    <li><a href="/account">My Account</a></li>
+                    @if(Auth::user()->is_parent)
+                        <li><a href="/caregivers">Caregivers</a></li>
+                        <li><a href="/myjobs">My Jobs</a></li>
+                        <li><a href="/jobs/new">Post New Job</a></li>
+                    @else
+                        <li><a href="/profile">My Profile</a></li>
+                        <li><a href="/jobs">Jobs</a></li>
+                    @endif
                     <li><a href="/logout">Logout</a></li>
                 @else
                     <li><a href="/login">Login</a></li>
