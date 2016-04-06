@@ -9,7 +9,7 @@
         </ul>
     @endif
     <div class="panel-group panel-primary">
-        <div class="panel-heading">My Profile</div>
+        <div class="panel-heading"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> My Profile</div>
         <div class="panel-body">
             <form method='POST' action='/profile'>
                 {{ csrf_field() }}

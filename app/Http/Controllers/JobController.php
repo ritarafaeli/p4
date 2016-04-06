@@ -60,7 +60,6 @@ class JobController extends Controller
         $job->user_name = $user->name;
         $job->user_email = $user->email;
         $job->user_profile_picture = $user->profile_picture;
-
         return view('job.show')->with('job', $job);
     }
 
@@ -81,5 +80,13 @@ class JobController extends Controller
     }
 
     public function destroy($id){
+        $user = Auth::user();
+        $job = Job::find($id);
+        $guardian = Guardian::find($job->parent_id);
+        if($guardian->id === $job->parent_id) {
+            $job->delete();
+        }
+        $jobs = Job::where('parent_id', $guardian->id)->get();
+        return view('job.all')->with('jobs', $jobs);
     }
 }

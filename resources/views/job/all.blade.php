@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-<h4>My Jobs</h4>
+<h4><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> My Jobs</h4>
 <div class="container">
     <table class="table table-hover">
         <thead>
@@ -14,14 +14,13 @@
             </tr>
         </thead>
         <tbody>
-        @foreach($jobs as $job)
+            @foreach($jobs as $key => $value)
             <tr>
-                <th scope="row">1</th>
-                <td>{{ $job->title }}</td>
-                <td>{{ $job->description }}</td>
-                <td><a href="/job/edit/{{ $job->id }}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
-                <td><a href="/job/delete/{{ $job->id }}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
-            </tr>
+                <th scope="row">{{ $key + 1}}</th>
+                <td>{{ $value->title }}</td>
+                <td>{{ $value->description }}</td>
+                <td><a href="/job/edit/{{ $value->id }}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+                <td><a href="/job/delete/{{ $value->id }}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
             </tr>
         @endforeach
         </tbody>

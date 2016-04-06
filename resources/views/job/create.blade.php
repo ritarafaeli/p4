@@ -62,7 +62,9 @@
         </form>
     </div>
     <div class="panel-footer">
-        <p>View my <a href='/jobs/all'>job postings</a>.</p>
+        <p class="navbar-btn">
+            <a href="/jobs/all" class="btn btn-default"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> My Job Posts</a>
+        </p>
     </div>
 </div>
 @stop

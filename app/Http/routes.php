@@ -37,7 +37,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('/job/create', 'JobController@create');# Create new job
         Route::get('/job/edit/{id}', 'JobController@edit');# Edit job form
         Route::post('/job/edit/{id}', 'JobController@update');# Update job
-        Route::post('/job/delete/{id}', 'JobController@delete');# Delete job
+        Route::get('/job/delete/{id}', 'JobController@destroy');# Delete job
         Route::get('/jobs/all', 'JobController@getMyJobs');# Show guardian's list of jobs
         Route::get('/caregivers', 'CaregiverController@index');# Show list of caregivers
         Route::get('/profile/{id}', 'CaregiverController@show');# Show caregiver profile
