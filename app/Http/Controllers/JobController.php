@@ -45,10 +45,12 @@ class JobController extends Controller
     public function getMyJobs(){
         $user = Auth::user();
         $guardian = Guardian::where('user_id',$user->id)->first();
-        //dump($guardian);
-        $jobs = Job::where('parent_id',$guardian->user_id);
-        //dump($jobs);
-        return view('job.all')->with('jobs', $jobs);
+        if($guardian !== null) {
+            $jobs = Job::where('parent_id', $guardian->user_id);
+            //dump($jobs);
+            return view('job.all')->with('jobs', $jobs);
+        }
+        return view('welcome');
     }
 
     public function edit($id){

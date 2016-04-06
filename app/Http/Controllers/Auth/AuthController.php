@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Guardian;
+use App\Caregiver;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -58,6 +60,7 @@ class AuthController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'is_parent' => 'required|boolean',
         ]);
     }
 
@@ -69,11 +72,22 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'is_parent' => $data['is_parent'],
         ]);
+        if($data['is_parent']){
+            $guardian = new Guardian();
+            $guardian->setAttribute('user_id', $user->id);
+            $guardian->save();
+        }else{
+            $caregiver = new Caregiver();
+            $caregiver->setAttribute('user_id', $user->id);
+            $caregiver->save();
+        }
+        return $user;
     }
 
     /**
