@@ -2,19 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\Caregiver;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
 class CaregiverController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+
+    public function index(){
         $caregivers = \App\Caregiver::all();
 
         foreach($caregivers as $caregiver) {
@@ -25,88 +23,40 @@ class CaregiverController extends Controller
         }
         return view('caregivers')->with('caregivers', $caregivers);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function show($id){
+        $caregiver = Caregiver::where('id',$id)->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $caregiver = new \App\Caregiver();
-        //TODO: pull from request
-        $caregiver->save();
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $caregiver = \App\Caregiver::where('id',$id)->get();
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Request $request)
-    {
+    public function edit(Request $request){
         $user = Auth::user();
         if ($user && !$user->is_parent) {
-            $caregiver = \App\Caregiver::where('id',$user->id)->get();
+            $caregiver = Caregiver::where('user_id',$user->id)->first();
             return view('profile')->with('caregiver', $caregiver);
         }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
+    public function update(Request $request){
         $user = Auth::user();
         if ($user && !$user->is_parent) {
-            $caregiver = \App\Caregiver::where('id', $user->id)->get();
-            //TODO: pull from request
+            $this->validate($request, [
+                'bio' => 'max:500',
+                'zip_code' => 'size:5',
+            ]);
+            $caregiver = Caregiver::where('user_id', $user->id)->first();
+            $caregiver->bio = $request->get('bio');
+            $caregiver->zip_code = $request->get('zip_code');
+            $caregiver->is_smoker = $request->get('is_smoker') !== null;
+            $caregiver->is_driver = $request->get('is_driver') !== null;
+            $caregiver->is_cpr_certified = $request->get('is_cpr_certified') !== null;
             $caregiver->save();
+            return view('profile')->with('caregiver', $caregiver);
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy()
-    {
+    public function destroy(){
         $user = Auth::user();
-
-        $caregiver = \App\Caregiver::where('id',$user->id);
+        $caregiver = Caregiver::where('user_id', $user->id)->first();
         $caregiver->delete();
-
         $user->delete();
     }
 }

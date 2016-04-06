@@ -1,6 +1,3 @@
-.img-center {
-	margin: 0 auto;
-}
 html, body, input, select, textarea
 {
     font-size: 1.05em;
@@ -8,8 +5,7 @@ html, body, input, select, textarea
 table {
     font-family:Arial;
     color:#666;
-    font-size:12px;
-    background:#eaebec;
+    font-size:14px;
     margin:20px;
     border:#ccc 1px solid;
     border-radius:3px;

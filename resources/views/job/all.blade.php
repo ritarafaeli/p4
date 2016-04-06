@@ -3,20 +3,31 @@
 @section('content')
 <h4>My Jobs</h4>
 <div class="container">
-    @foreach($jobs as $job)
-        <div class="col-xs-6 col-md-3 text-center">
-            @if($job->user_profile_picture != null)
-                <a href="/job/{{ $job->id }}"><img class="img-circle img-responsive img-center" src="{{ $job->user_profile_picture }}" alt=""></a>
-            @else
-                <a href="/job/{{ $job->id }}"><img class="img-circle img-responsive img-center" src="http://placehold.it/100x100" alt=""></a>
-            @endif
-            <h3>{{ $job->title }}</h3>
-            <p>{{ $job->description }}</p>
-        </div>
-    @endforeach
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach($jobs as $job)
+            <tr>
+                <th scope="row">1</th>
+                <td>{{ $job->title }}</td>
+                <td>{{ $job->description }}</td>
+                <td><a href="/job/edit/{{ $job->id }}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
+                <td><a href="/job/delete/{{ $job->id }}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+            </tr>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+    <p class="navbar-btn">
+        <a href="/newjob" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Post a New Job</a>
+    </p>
 </div>
-
-<button type="button" class="btn btn-default btn-lg" href="/job/create">
-    <span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span>  Post New Job
-</button>
 @stop

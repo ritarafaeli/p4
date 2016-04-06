@@ -42,7 +42,7 @@ class AddTables extends Migration
             $table->boolean('is_smoker')->default(false);
             $table->boolean('is_driver')->default(false);
             $table->boolean('is_cpr_certified')->default(false);
-            $table->integer('education_level_id')->unsigned();
+            $table->integer('education_level_id')->unsigned()->nullable();;
             $table->foreign('education_level_id')->references('id')->on('user_inputs')->nullable();
         });
 
@@ -57,7 +57,7 @@ class AddTables extends Migration
             $table->integer('num_children');
             $table->integer('hourly_rate_id')->unsigned();
             $table->foreign('hourly_rate_id')->references('id')->on('user_inputs');
-            $table->integer('education_level_id')->unsigned();
+            $table->integer('education_level_id')->unsigned()->nullable();;
             $table->foreign('education_level_id')->references('id')->on('user_inputs')->nullable();
             $table->boolean('is_smoker')->default(false);
             $table->boolean('is_driver')->default(false);
