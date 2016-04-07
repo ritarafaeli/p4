@@ -13,15 +13,16 @@
     <div class="panel-group panel-primary">
         <div class="panel-heading"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> My Account</div>
         <div class="panel-body">
-            <form method='POST' action='/account'>
+            <form method='POST' action='/account' enctype="multipart/form-data" >
                 {{ csrf_field() }}
                 <div class='form-group'>
                     <label>Profile Picture:</label><br>
-                    @if(Auth::user()->profile_picture != null)
-                        <img class="img-thumbnail img-left" src="{{ Auth::user()->profile_picture }}" alt="{{ Auth::user()->name }}">
-                    @else
-                        <a href="/uploadphoto"><img class="img-thumbnail img-left" src="http://placehold.it/150x150" alt="Upload Photo"></a>
-                    @endif
+                @if(Auth::user()->profile_picture !== null)
+                    <img id="photo" width="150" height="150"  class="img-thumbnail img-left" src="{{ Auth::user()->profile_picture }}" alt="{{ Auth::user()->name }}">
+                @else
+                    <img id="photo" width="150" height="150" class="img-thumbnail img-left" src="http://placehold.it/150x150" alt="">
+                @endif
+                    <input type="file" name="profile_picture" onchange="document.getElementById('photo').src = window.URL.createObjectURL(this.files[0])">
                 </div>
                 <div class='form-group'>
                     <label>Name:</label>

@@ -5,7 +5,7 @@
     @if(isset($jobs))
         <div class="container">
             @foreach($jobs as $job)
-                <div class="col-xs-6 col-md-3 text-center">
+                <div class="col-md-4 text-center">
                     @if($job->user_profile_picture != null)
                         <a href="/job/{{ $job->id }}"><img class="img-circle img-responsive img-center" src="{{ $job->user_profile_picture }}" alt=""></a>
                     @else

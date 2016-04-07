@@ -28,12 +28,12 @@ class AuthServiceProvider extends ServiceProvider
 
         //only parents can post jobs
         $gate->define('parent-job', function ($user) {
-            return $user->$isParent;
+            return $user->is_parent;
         });
 
         //only caregivers can create profiles
         $gate->define('caregiver-profile', function ($user) {
-            return !$user->$is_parent;
+            return !$user->is_parent;
         });
     }
 }

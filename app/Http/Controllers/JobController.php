@@ -34,7 +34,8 @@ class JobController extends Controller
             'hourly_rate_id' => 'required',
         ]);
         //get guardian
-        $guardian = Guardian::where('user_id',Auth::user()->id)->first();
+        $user = Auth::user();
+        $guardian = Guardian::where('user_id',$user->id)->first();
         //create job
         if($guardian !== null) {
             $job = new Job();
@@ -47,6 +48,9 @@ class JobController extends Controller
             $job->setAttribute('education_level_id', $request->get('education_level_id'));
             $job->save();
         }
+        $job->setAttribute('user_name',$user->name);
+        $job->setAttribute('user_profile_picture',$user->profile_picture);
+        $job->setAttribute('user_email',$user->email);
         return view('job.show')->with('job', $job);
     }
 
@@ -74,9 +78,39 @@ class JobController extends Controller
     }
 
     public function edit($id){
+        $job = Job::find($id);
+        $guardian = Guardian::find($job->parent_id);
+        if(Auth::user()->id === $guardian->user_id){
+            return view('job.edit')->with('job', $job);
+        }
+        return view('welcome');
     }
 
     public function update(Request $request, $id){
+        $this->validate($request, [
+            'title' => 'required|max:50',
+            'description' => 'required|max:500',
+            'num_children' => 'required|min:1|max:7',
+            'zip_code' => 'required|integer|min:00501|max:99999',
+            'hourly_rate_id' => 'required',
+        ]);
+        $job = Job::find($id);
+        $guardian = Guardian::find($job->parent_id);
+        if(Auth::user()->id === $guardian->user_id){
+            $job->setAttribute('title', $request->get('title'));
+            $job->setAttribute('description', $request->get('description'));
+            $job->setAttribute('num_children', $request->get('num_children'));
+            $job->setAttribute('zip_code', $request->get('zip_code'));
+            $job->setAttribute('is_smoker', $request->get('is_smoker'));
+            $job->setAttribute('is_driver', $request->get('is_driver'));
+            $job->setAttribute('is_cpr_certified', $request->get('is_cpr_certified') != null);
+            $job->setAttribute('hourly_rate_id', $request->get('hourly_rate_id'));
+            $job->setAttribute('education_level_id', $request->get('education_level_id'));
+            $job->save();
+            return $this->getMyJobs();
+        }
+        return view('welcome');
+
     }
 
     public function destroy($id){
@@ -86,7 +120,6 @@ class JobController extends Controller
         if($guardian->id === $job->parent_id) {
             $job->delete();
         }
-        $jobs = Job::where('parent_id', $guardian->id)->get();
-        return view('job.all')->with('jobs', $jobs);
+        return $this->getMyJobs();
     }
 }
