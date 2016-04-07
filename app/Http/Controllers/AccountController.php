@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Auth;
 use Image;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 
@@ -29,9 +30,15 @@ class AccountController extends Controller
 
         $image = $request->file('profile_picture');
         if ($image !== null){
+            //delete old image if exists
+            if($user->profile_picture!==null){
+                File::delete($user->profile_picture);
+            }
+
+            //rename and resize photo
             $image = Input::file('profile_picture');
             $filename  = time() . $image->getClientOriginalName();
-            $path = 'public/assets/img/profile_picture/' . $filename;
+            $path = 'assets/img/profile_picture/' . $filename;
             Image::make($image->getRealPath())->resize(200, 200)->save($path);
             $user->profile_picture = $path;
         }

@@ -27,3 +27,6 @@ table td {
 .panel {
     border: 1px solid #dddddd;
 }
+.input-group {
+    margin-bottom: 10px;
+}

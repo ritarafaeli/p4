@@ -10,58 +10,49 @@
         </ul>
     @endif
 
-    <div class="panel-group panel-primary">
-        <div class="panel-heading"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Register</div>
-        <div class="panel-body">
-            <div class='alert alert-danger' role="alert" ng-show="errors">
-                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                Please correct the form errors below and try again.
-            </div>
-            <form method='POST' action='/register'>
-                {!! csrf_field() !!}
-                <div class='form-group row'>
-                    <label class="col-sm-3 control-label">Name</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type='text' name='name' id='name' value='{{ old('name') }}'>
-                    </div>
+    <div class="well col-xs-7">
+        <div class="panel-group panel-primary">
+            <div class="panel-heading"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Register</div>
+            <div class="panel-body">
+                <div class='alert alert-danger' role="alert" ng-show="errors">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    Please correct the form errors below and try again.
                 </div>
-                <div class='form-group row'>
-                    <label class="col-sm-3 control-label">Account Type</label>
-                    <div class="col-sm-4">
+                <form method='POST' action='/register'>
+                    {!! csrf_field() !!}
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input name='name' class="form-control" type="text" placeholder="Name" value='{{ old('name') }}'>
+                    </div>
+                    <div class='input-group'>
+                        <span class="input-group-addon"><i class="fa fa-user" title="Account Type"></i></span>
                         <select class="form-control" name='is_parent'>
                             <option value='1'>Parent/Guardian</option>
                             <option value='0'>Caregiver</option>
                         </select>
                     </div>
-                </div>
-                <div class='form-group row'>
-                    <label class="col-sm-3 control-label">Email</label>
-                    <div class="col-sm-4">
-                        <input type='text' class="form-control" name='email' id='email' value='{{ old('email') }}'>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                        <input name='email' class="form-control" type="text" placeholder="Email address" value='{{ old('email') }}'>
                     </div>
-                </div>
-                <div class='form-group row'>
-                    <label class="col-sm-3 control-label">Password</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type='password' name='password' id='password'>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                        <input name='password' class="form-control" type="password" placeholder="Password" value='{{ old('password') }}'>
                     </div>
-                </div>
-                <div class='form-group row'>
-                    <label class="col-sm-3 control-label">Confirm Password</label>
-                    <div class="col-sm-4">
-                        <input class="form-control" type='password' name='password_confirmation' id='password_confirmation'>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                        <input name='password' class="form-control" type="password_confirmation" placeholder="Confirm Password">
                     </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-10">
-                        <button type='submit' class='btn btn-primary'>Register</button>
+                    <div class="form-group row">
+                        <div class="col-sm-10">
+                            <button type='submit' class='btn btn-primary'>Register</button>
+                        </div>
                     </div>
-                </div>
-            </form>
-        </div>
-        <div class="panel-footer">
-            <p>Already have an account? <a href='/login'>Login here</a></p>
+                </form>
+            </div>
+            <div class="panel-footer">
+                <h5>Already have an account? <a href='/login'>Login here</a></h5>
+            </div>
         </div>
     </div>
-
 @stop
