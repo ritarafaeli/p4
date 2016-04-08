@@ -16,11 +16,11 @@
         <form method='POST' action='/login'>
             {!! csrf_field() !!}
             <div class="input-group margin-bottom-sm">
-                <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-                <input name='email' class="form-control" type="text" placeholder="Email address" value='{{ old('email') }}'>
+                <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw" title="Email Address" data-toggle="tooltip" data-placement="left"></i></span>
+                <input name='email' class="form-control" type="text" placeholder="Email Address" value='{{ old('email') }}'>
             </div>
             <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                <span class="input-group-addon"><i class="fa fa-key fa-fw" title="Password" data-toggle="tooltip" data-placement="left"></i></span>
                 <input name='password' class="form-control" type="password" placeholder="Password" value='{{ old('password') }}'>
             </div>
             <div class='form-group'>

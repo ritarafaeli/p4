@@ -20,6 +20,7 @@ class CaregiverController extends Controller
             $caregiver->name = $user->name;
             $caregiver->email = $user->email;
             $caregiver->profile_picture = $user->profile_picture;
+            $caregiver->user_id = $user->id;
         }
         return view('caregivers')->with('caregivers', $caregivers);
     }

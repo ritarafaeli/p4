@@ -1,7 +1,6 @@
 @extends('layouts.master')
-
 @section('content')
-<h4><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> My Jobs</h4>
+<h4><i class="fa fa-list-alt"></i> My Jobs</h4>
 <div class="container">
     <table class="table table-hover">
         <thead>
@@ -19,14 +18,18 @@
                 <th scope="row">{{ $key + 1}}</th>
                 <td>{{ $value->title }}</td>
                 <td>{{ $value->description }}</td>
-                <td><a href="/job/edit/{{ $value->id }}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></a></td>
-                <td><a href="/job/delete/{{ $value->id }}"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a></td>
+                <td><a href="/job/edit/{{ $value->id }}" title="Edit Job Listing" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-pencil"></i></a></td>
+                <td><a href="/job/delete/{{ $value->id }}" title="Delete Job Listing" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-trash"></i></a></td>
             </tr>
         @endforeach
+            <tr>
+                <th scope="row"><a href="/newjob" title="Post New Job" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-plus-circle"></i></a></th>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
         </tbody>
     </table>
-    <p class="navbar-btn">
-        <a href="/newjob" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> Post a New Job</a>
-    </p>
 </div>
 @stop

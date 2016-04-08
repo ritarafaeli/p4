@@ -21,26 +21,26 @@
                 <form method='POST' action='/register'>
                     {!! csrf_field() !!}
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-user" title="Full Name" data-toggle="tooltip" data-placement="left"></i></span>
                         <input name='name' class="form-control" type="text" placeholder="Name" value='{{ old('name') }}'>
                     </div>
                     <div class='input-group'>
-                        <span class="input-group-addon"><i class="fa fa-user" title="Account Type"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-user" title="Account Type" data-toggle="tooltip" data-placement="left"></i></span>
                         <select class="form-control" name='is_parent'>
                             <option value='1'>Parent/Guardian</option>
                             <option value='0'>Caregiver</option>
                         </select>
                     </div>
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                        <input name='email' class="form-control" type="text" placeholder="Email address" value='{{ old('email') }}'>
+                        <span class="input-group-addon"><i class="fa fa-envelope" title="Email Address" data-toggle="tooltip" data-placement="left"></i></span>
+                        <input name='email' class="form-control" type="text" placeholder="Email Address" value='{{ old('email') }}'>
                     </div>
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-asterisk" title="Password" data-toggle="tooltip" data-placement="left"></i></span>
                         <input name='password' class="form-control" type="password" placeholder="Password" value='{{ old('password') }}'>
                     </div>
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-asterisk" title="Retype Password" data-toggle="tooltip" data-placement="left"></i></span>
                         <input name='password_confirmation' class="form-control" type="password" placeholder="Confirm Password">
                     </div>
                     <div class="form-group row">
