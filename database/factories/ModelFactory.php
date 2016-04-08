@@ -36,7 +36,7 @@ $factory->define(App\Caregiver::class, function (Faker\Generator $faker) use ($f
         'is_smoker' => $faker->boolean(20),
         'is_driver' => $faker->boolean(90),
         'is_cpr_certified' => $faker->boolean(30),
-        'education_level_id' => factory(\App\UserInput::class)->create()->id,
+        'education_level_id' => $faker->numberBetween(7,11),
     ];
 });
 
@@ -57,7 +57,7 @@ $factory->define(App\Job::class, function (Faker\Generator $faker) use ($factory
         'is_driver' => $faker->boolean(90),
         'is_cpr_certified' => $faker->boolean(30),
         'is_smoker' => $faker->boolean(10),
-        'education_level_id' => factory(\App\UserInput::class)->create()->id,
-        'hourly_rate_id' => factory(\App\UserInput::class)->create()->id,
+        'education_level_id' => $faker->numberBetween(7,11),
+        'hourly_rate_id' => $faker->numberBetween(1,6),
     ];
 });

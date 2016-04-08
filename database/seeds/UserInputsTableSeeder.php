@@ -11,7 +11,72 @@ class UserInputsTableSeeder extends Seeder
      */
     public function run()
     {
-        //create 30 random user inputs from the ModelFactory
-        factory(App\UserInput::class, 30)->create();
+        //Hourly Rates
+        DB::table('user_inputs')->insert([
+            'category' => 'HourlyRate',
+            'subcategory' => '$5-$10',
+        ]);
+        DB::table('user_inputs')->insert([
+            'category' => 'HourlyRate',
+            'subcategory' => '$10-$15',
+        ]);
+        DB::table('user_inputs')->insert([
+            'category' => 'HourlyRate',
+            'subcategory' => '$15-$20',
+        ]);
+        DB::table('user_inputs')->insert([
+            'category' => 'HourlyRate',
+            'subcategory' => '$20-$25',
+        ]);
+        DB::table('user_inputs')->insert([
+            'category' => 'HourlyRate',
+            'subcategory' => '$25+',
+        ]);
+        DB::table('user_inputs')->insert([
+            'category' => 'HourlyRate',
+            'subcategory' => 'Flexible',
+        ]);
+
+
+        //Education Level
+        DB::table('user_inputs')->insert([
+            'category' => 'Education',
+            'subcategory' => 'High School',
+        ]);
+        DB::table('user_inputs')->insert([
+            'category' => 'Education',
+            'subcategory' => 'Some College',
+        ]);
+        DB::table('user_inputs')->insert([
+            'category' => 'Education',
+            'subcategory' => 'Bachelor\'s Degree',
+        ]);
+        DB::table('user_inputs')->insert([
+            'category' => 'Education',
+            'subcategory' => 'Master\'s Degree',
+        ]);
+        DB::table('user_inputs')->insert([
+            'category' => 'Education',
+            'subcategory' => 'Doctorate Degree',
+        ]);
+
+        //Languages
+        DB::table('user_inputs')->insert([
+            'category' => 'Language',
+            'subcategory' => 'English',
+        ]);
+        DB::table('user_inputs')->insert([
+            'category' => 'Language',
+            'subcategory' => 'Spanish',
+        ]);
+        DB::table('user_inputs')->insert([
+            'category' => 'Language',
+            'subcategory' => 'Chinese',
+        ]);
+        DB::table('user_inputs')->insert([
+            'category' => 'Language',
+            'subcategory' => 'Russian',
+        ]);
+
     }
 }

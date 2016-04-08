@@ -45,13 +45,21 @@
             <div class='form-group row'>
                 <label class="col-sm-3 control-label">Education Level</label>
                 <div class="col-sm-4">
-                    <input type='text' class="form-control" name='education_level_id' value='{{ old('education_level_id') }}'>
+                    <select class="form-control"  name="education_level_id">
+                        @foreach ($education_levels as $key => $value)
+                            <option value="{{ $key }}">{{ $value }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class='form-group row'>
                 <label class="col-sm-3 control-label">Hourly Rate</label>
                 <div class="col-sm-4">
-                    <input type='text' class="form-control" name='hourly_rate_id' value='{{ old('hourly_rate_id') }}'>
+                    <select class="form-control"  name="hourly_rate_id">
+                        @foreach ($hourly_rates as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
             <div class="form-group row">

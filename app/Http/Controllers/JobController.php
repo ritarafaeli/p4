@@ -8,6 +8,8 @@ use App\User;
 use App\Guardian;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\UserInputsController;
+
 use App\Http\Requests;
 
 class JobController extends Controller
@@ -24,6 +26,13 @@ class JobController extends Controller
         return view('job.list')->with('jobs', $jobs);
     }
 
+    public function getCreateJobForm(){
+        $uic = new UserInputsController();
+        $rates = $uic->getHourlyRates();;
+        $education_level = $uic->getEducationLevels();;
+        return view('job.create', ['hourly_rates'=> $rates, 'education_levels' => $education_level]);
+    }
+    
     public function create(Request $request){
         //validate request
         $this->validate($request, [
@@ -81,7 +90,10 @@ class JobController extends Controller
         $job = Job::find($id);
         $guardian = Guardian::find($job->parent_id);
         if(Auth::user()->id === $guardian->user_id){
-            return view('job.edit')->with('job', $job);
+            $uic = new UserInputsController();
+            $rates = $uic->getHourlyRates();;
+            $education_level = $uic->getEducationLevels();;
+            return view('job.edit', ['job' => $job, 'hourly_rates'=> $rates, 'education_levels' => $education_level]);
         }
         return view('welcome');
     }
@@ -101,8 +113,8 @@ class JobController extends Controller
             $job->setAttribute('description', $request->get('description'));
             $job->setAttribute('num_children', $request->get('num_children'));
             $job->setAttribute('zip_code', $request->get('zip_code'));
-            $job->setAttribute('is_smoker', $request->get('is_smoker'));
-            $job->setAttribute('is_driver', $request->get('is_driver'));
+            $job->setAttribute('is_smoker', $request->get('is_smoker') !== null);
+            $job->setAttribute('is_driver', $request->get('is_driver') !== null);
             $job->setAttribute('is_cpr_certified', $request->get('is_cpr_certified') != null);
             $job->setAttribute('hourly_rate_id', $request->get('hourly_rate_id'));
             $job->setAttribute('education_level_id', $request->get('education_level_id'));

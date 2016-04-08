@@ -41,7 +41,7 @@
                     </div>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-asterisk"></i></span>
-                        <input name='password' class="form-control" type="password_confirmation" placeholder="Confirm Password">
+                        <input name='password_confirmation' class="form-control" type="password" placeholder="Confirm Password">
                     </div>
                     <div class="form-group row">
                         <div class="col-sm-10">

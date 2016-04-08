@@ -19,7 +19,6 @@ class AddTables extends Migration
 
         Schema::create('user_inputs', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
             $table->string('category');
             $table->string('subcategory');
             $table->string('description')->nullable();
