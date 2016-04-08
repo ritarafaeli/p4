@@ -25,8 +25,8 @@
             </div>
 
             <div class="card-action-pellet btn-toolbar pull-right" role="toolbar">
-                <a class="btn-group" href="/message/{{ $value->user_id }}"><i class="btn-group fa fa-envelope"></i></a>
-                <a class="btn-group" href="/caregiver/{{ $value->id }}"><i class="btn-group fa fa-user"></i></a>
+                <a class="btn-group btn-grey" href="/message/{{ $value->user_id }}"><i class="btn-group fa fa-envelope"></i></a>
+                <a class="btn-group btn-grey" href="/caregiver/{{ $value->id }}"><i class="btn-group fa fa-user"></i></a>
             </div>
         </div>
     </div>

@@ -18,12 +18,12 @@
                 <th scope="row">{{ $key + 1}}</th>
                 <td>{{ $value->title }}</td>
                 <td>{{ $value->description }}</td>
-                <td><a href="/job/edit/{{ $value->id }}" title="Edit Job Listing" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-pencil"></i></a></td>
-                <td><a href="/job/delete/{{ $value->id }}" title="Delete Job Listing" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-trash"></i></a></td>
+                <td><a class="btn-blue" href="/job/edit/{{ $value->id }}" title="Edit Job Listing" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-pencil"></i></a></td>
+                <td><a class="btn-blue" href="/job/delete/{{ $value->id }}" title="Delete Job Listing" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-trash"></i></a></td>
             </tr>
         @endforeach
             <tr>
-                <th scope="row"><a href="/newjob" title="Post New Job" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-plus-circle"></i></a></th>
+                <th scope="row"><a class="btn-grey" href="/newjob" title="Post New Job" data-toggle="tooltip" data-placement="bottom"><i class="fa fa-plus-circle"></i></a></th>
                 <td></td>
                 <td></td>
                 <td></td>

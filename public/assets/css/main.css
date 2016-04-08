@@ -30,6 +30,18 @@ table td {
 .input-group {
     margin-bottom: 10px;
 }
+.btn-grey{
+    color: #c0c0c0;
+}
+.btn-grey:hover{
+    color: #257a9a;
+}
+.btn-blue{
+    color: #257a9a;
+}
+.btn-blue:hover{
+    color: #909090;
+}
 .block-update-card {
     height: 100%;
     border: 1px #FFFFFF solid;
@@ -63,7 +75,7 @@ table td {
     margin-left: 5px;
 }
 .block-update-card .update-card-body h4 {
-    color: #737373;
+    color: #257a9a;
     font-weight: bold;
     font-size: 13px;
 }
