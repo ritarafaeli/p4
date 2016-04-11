@@ -21,8 +21,8 @@
                             <p><b>Bio: </b>{{ $value->bio }}</p>
                             <p><b>Last Login: </b>{{ $value->last_login }}</p>
                             <ul class="fa-ul">
-                                @if($value->education_level_id !== null)
-                                    <li><i class="fa-li fa fa-graduation-cap"></i> Completed {{ $value->subcategory }}</li>
+                                @if($value->education_level !== null)
+                                    <li><i class="fa-li fa fa-graduation-cap"></i> Completed {{ $value->education_level }}</li>
                                 @endif
                                 <li><i class="fa fa-li fa-child"></i> Will work with up to {{ $value->max_children === 1 ? '1 child' : $value->max_children . ' children'}}.</li>
                                 <li><i class="fa-li fa fa-check-square"></i> Has {{ $value->years_experience === 1 ? '1 year' : $value->years_experience . ' years'}} experience.</li>

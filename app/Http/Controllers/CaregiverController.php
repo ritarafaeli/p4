@@ -17,13 +17,15 @@ class CaregiverController extends Controller
 
     public function index(){
         $caregivers = DB::table('caregivers')
+            ->select('caregivers.*','user_inputs.subcategory as education_level')
             ->leftJoin('user_inputs', 'caregivers.education_level_id', '=', 'user_inputs.id')->get();
+        //dump($caregivers);
         foreach($caregivers as $caregiver) {
             $user = User::find($caregiver->user_id);
             $caregiver->name = $user->name;
             $caregiver->email = $user->email;
             $caregiver->profile_picture = $user->profile_picture;
-            $caregiver->user_id = $user->id;
+            //$caregiver->user_id = $user->id;
             $caregiver->last_login = $user->last_login;
             $caregiver->bio = str_limit($caregiver->bio, $limit = 180, $end = '...');
         }

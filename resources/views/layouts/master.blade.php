@@ -45,7 +45,8 @@
                         <li><a href="/profile">My Profile</a></li>
                         <li><a href="/jobs">Jobs</a></li>
                     @endif
-                    <li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a></li>
+                    <li><a href="#">Inbox <span class="badge">11</span></a></li>
+                    <li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
                 @else
                     <li><a href="/login"><i class="fa fa-sign-in"></i> Login</a></li>
                     <li><a href="/register"><i class="fa fa-plus-square"></i> Register</a></li>
