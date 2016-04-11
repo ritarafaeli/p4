@@ -17,6 +17,6 @@ class UserInputsController extends Controller
         return UserInput::where('category','HourlyRate')->pluck('subcategory', 'id');
     }
     public function getSubcategoryById($id){
-        return UserInput::find($id)->pluck('subcategory');
+        return UserInput::find($id)->get();
     }
 }

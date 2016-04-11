@@ -20,7 +20,7 @@
                 @if(Auth::user()->profile_picture !== null)
                     <img id="photo" width="150" height="150"  class="img-thumbnail img-left" src="{{ Auth::user()->profile_picture }}" alt="{{ Auth::user()->name }}">
                 @else
-                    <img id="photo" width="150" height="150" class="img-thumbnail img-left" src="http://placehold.it/150x150" alt="">
+                    <img id="photo" width="150" height="150" class="img-thumbnail img-left" src="{{URL::asset('assets/img/default_profile_avatar.jpg')}}" alt="">
                 @endif
                     <input type="file" name="profile_picture" onchange="document.getElementById('photo').src = window.URL.createObjectURL(this.files[0])">
                 </div>

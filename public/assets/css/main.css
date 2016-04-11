@@ -45,14 +45,15 @@ table td {
 .block-update-card {
     height: 100%;
     border: 1px #FFFFFF solid;
-    width: 380px;
+    width: 700px;
     float: left;
     margin-left: 10px;
     margin-top: 0;
+    margin-bottom: 15px;
     padding: 0;
     box-shadow: 1px 1px 8px #d8d8d8;
     background-color: #FFFFFF;
-    height: 150px;
+    height: 220px;
 }
 .block-update-card .h-status {
     width: 100%;
@@ -83,6 +84,10 @@ table td {
     color: #737373;
     font-size: 12px;
 }
+.block-update-card .update-card-body ul {
+    color: #737373;
+    font-size: 12px;
+}
 .block-update-card .card-action-pellet {
     padding: 5px;
 }
@@ -108,40 +113,8 @@ table td {
     color: #FFFFFF;
     cursor: pointer;
 }
-
-/*
-Creating a block for social media buttons
-*/
-.card-body-social {
-    font-size: 30px;
-    margin-top: 10px;
-}
-.card-body-social .git {
-    color: black;
-    cursor: pointer;
+.caregiver-card-features {
+    color: #31aaa0;
     margin-left: 10px;
-}
-.card-body-social .twitter {
-    color: #19C4FF;
-    cursor: pointer;
-    margin-left: 10px;
-}
-.card-body-social .google-plus {
-    color: #DD4B39;
-    cursor: pointer;
-    margin-left: 10px;
-}
-.card-body-social .facebook {
-    color: #49649F;
-    cursor: pointer;
-    margin-left: 10px;
-}
-.card-body-social .linkedin {
-    color: #007BB6;
-    cursor: pointer;
-    margin-left: 10px;
-}
-
-.music-card {
-    background-color: green;
+    margin-bottom: 10px;
 }

@@ -33,12 +33,19 @@ $factory->define(App\Caregiver::class, function (Faker\Generator $faker) use ($f
         'user_id' => factory(\App\User::class)->create()->id,
         'bio' => $faker->text(),
         'zip_code' => $faker->numberBetween(10000,99999),
+        'age' => $faker->numberBetween(18,65),
+        'years_experience' => $faker->numberBetween(0,30),
         'is_smoker' => $faker->boolean(20),
         'is_driver' => $faker->boolean(90),
         'is_cpr_certified' => $faker->boolean(30),
+        'is_experienced_infants' => $faker->boolean(50),
+        'is_experienced_toddlers' => $faker->boolean(50),
+        'is_experienced_preschoolers' => $faker->boolean(50),
+        'is_experienced_specialneeds' => $faker->boolean(50),
         'education_level_id' => $faker->numberBetween(7,11),
     ];
 });
+
 
 $factory->define(App\Guardian::class, function (Faker\Generator $faker) use ($factory) {
     return [

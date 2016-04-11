@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Caregiver;
+use App\User;
+use App\UserInput;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -13,19 +16,27 @@ class CaregiverController extends Controller
 {
 
     public function index(){
-        $caregivers = \App\Caregiver::all();
-
+        $caregivers = DB::table('caregivers')
+            ->leftJoin('user_inputs', 'caregivers.education_level_id', '=', 'user_inputs.id')->get();
         foreach($caregivers as $caregiver) {
-            $user = \App\User::find($caregiver->user_id);
+            $user = User::find($caregiver->user_id);
             $caregiver->name = $user->name;
             $caregiver->email = $user->email;
             $caregiver->profile_picture = $user->profile_picture;
             $caregiver->user_id = $user->id;
+            $caregiver->last_login = $user->last_login;
+            $caregiver->bio = str_limit($caregiver->bio, $limit = 180, $end = '...');
         }
-        return view('caregivers')->with('caregivers', $caregivers);
+        return view('caregiver.all')->with('caregivers', $caregivers);
     }
     public function show($id){
-        $caregiver = Caregiver::where('id',$id)->get();
+        $caregiver = Caregiver::where('id',$id)->first();
+        $user = User::find($caregiver->user_id);
+        $caregiver->name = $user->name;
+        $caregiver->email = $user->email;
+        $caregiver->profile_picture = $user->profile_picture;
+        $caregiver->last_login = $user->last_login;
+        return view('caregiver.single')->with('caregiver', $caregiver);
     }
 
     public function edit(Request $request){

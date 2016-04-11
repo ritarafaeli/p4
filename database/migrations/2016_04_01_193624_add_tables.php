@@ -41,7 +41,7 @@ class AddTables extends Migration
             $table->boolean('is_smoker')->default(false);
             $table->boolean('is_driver')->default(false);
             $table->boolean('is_cpr_certified')->default(false);
-            $table->integer('education_level_id')->unsigned()->nullable();;
+            $table->integer('education_level_id')->unsigned()->nullable();
             $table->foreign('education_level_id')->references('id')->on('user_inputs')->nullable();
         });
 

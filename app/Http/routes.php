@@ -40,6 +40,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/job/delete/{id}', 'JobController@destroy');# Delete job
         Route::get('/jobs/all', 'JobController@getMyJobs');# Show guardian's list of jobs
         Route::get('/caregivers', 'CaregiverController@index');# Show list of caregivers
-        Route::get('/profile/{id}', 'CaregiverController@show');# Show caregiver profile
+        Route::get('/caregiver/{id}', 'CaregiverController@show');# Show caregiver profile
     });
 });
