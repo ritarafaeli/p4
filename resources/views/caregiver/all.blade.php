@@ -9,12 +9,11 @@
                     <div class="media block-update-card">
                         <a class="pull-left" href="#">
                             @if($value->profile_picture != null)
-                                <a class="pull-left" title="View Profile" data-toggle="tooltip" data-placement="bottom" href="/caregiver/{{ $value->id }}"><img class="media-object update-card-MDimentions" src="{{ $caregiver->profile_picture }}" alt=""></a>
+                                <a class="pull-left" title="View Profile" data-toggle="tooltip" data-placement="bottom" href="/caregiver/{{ $value->id }}"><img class="img-circle media-object update-card-MDimentions" src="{{ $value->profile_picture }}" alt=""></a>
                             @else
                                 <a class="pull-left" title="View Profile" data-toggle="tooltip" data-placement="bottom" href="/caregiver/{{ $value->id }}"><img class="media-object update-card-MDimentions" src="{{URL::asset('assets/img/default_profile_avatar.jpg')}}" alt=""></a>
                             @endif
                         </a>
-
                         <div class="media-body update-card-body">
                             <h4 class="media-heading text-center">{{ $value->name }}</h4>
                             <p><b>Age: </b>{{ $value->age }}</p>
@@ -40,9 +39,9 @@
                             @endif
                         </div>
                         <div class="card-action-pellet btn-toolbar pull-right" role="toolbar">
-                            <a class="btn-group btn-grey" href="/caregiver/favorite/{{ $value->user_id }}"><i class="fa fa-heart"></i></a>
-                            <a class="btn-group btn-grey" href="/message/{{ $value->user_id }}"><i class="btn-group fa fa-envelope"></i></a>
-                            <a class="btn-group btn-grey" href="/caregiver/{{ $value->id }}"><i class="btn-group fa fa-user"></i></a>
+                            <a title="Add to Favorites" data-toggle="tooltip" data-placement="bottom" class="btn-group btn-grey" href="/caregiver/favorite/{{ $value->user_id }}"><i class="fa fa-heart"></i></a>
+                            <a title="Message" data-toggle="tooltip" data-placement="bottom" class="btn-group btn-grey" href="/message/{{ $value->user_id }}"><i class="btn-group fa fa-envelope"></i></a>
+                            <a title="View Profile" data-toggle="tooltip" data-placement="bottom" class="btn-group btn-grey" href="/caregiver/{{ $value->id }}"><i class="btn-group fa fa-user"></i></a>
                         </div>
                     </div>
                 </div>

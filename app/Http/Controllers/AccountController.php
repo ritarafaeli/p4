@@ -38,9 +38,10 @@ class AccountController extends Controller
             //rename and resize photo
             $image = Input::file('profile_picture');
             $filename  = time() . $image->getClientOriginalName();
-            $path = 'assets/img/profile_picture/' . $filename;
-            Image::make($image->getRealPath())->resize(200, 200)->save($path);
-            $user->profile_picture = $path;
+            $relative_path = 'assets/img/profile_picture/'. $filename;
+            $absolute_path = public_path($relative_path);
+            Image::make($image->getRealPath())->resize(200, 200)->save($absolute_path);
+            $user->profile_picture = $relative_path;
         }
 
         if(Auth::validate($credentials)) {

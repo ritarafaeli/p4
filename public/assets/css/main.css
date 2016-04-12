@@ -98,12 +98,9 @@ table td {
 }
 .block-update-card .card-action-pellet div {
     margin-right: 10px;
-    font-size: 15px;
+    font-size: 12px;
     cursor: pointer;
     color: #dddddd;
-}
-.block-update-card .card-action-pellet div:hover {
-    color: #999999;
 }
 .block-update-card .card-bottom-status {
     color: #a9a9aa;

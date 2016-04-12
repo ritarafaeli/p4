@@ -3,24 +3,24 @@
 <head>
     <meta charset="utf-8">
     <title>Find a Babysitter</title>
-    <!--AngularJS-->
     <!--<script type="text/javascript" src="assets/js/angular.min.js"></script>
     <script type="text/javascript" src="assets/js/angular-route.min.js"></script>
     <script type="text/javascript" src="assets/js/app.js"></script>-->
-    <!-- bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <!-- Styling -->
     <link rel="stylesheet" href="{{URL::asset('assets/css/main.css')}}">
+    <!--<link rel="stylesheet" href="assets/css/bootstrap-tagsinput.css">-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
 </head>
 <body>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="{{URL::asset('assets/js/jquery-1.12.3.min.js')}}"></script>
 <script src="{{URL::asset('assets/js/bootstrap/bootstrap.min.js')}}"></script>
 <script src="{{URL::asset('assets/js/bootstrap/dropdown.js')}}"></script>
 <script src="{{URL::asset('assets/js/bootstrap/tooltip.js')}}"></script>
+<!--<script src="assets/js/bootstrap/bootstrap-tagsinput.min.js"></script>-->
+
 <script type="text/javascript">
-    //$('.my-dropdown').dropdown();
-    //$('.my-tooltip').tooltip();
     $('[data-toggle~="tooltip"]').tooltip({ container: 'body' });
     $('[data-toggle~="dropdown"]').dropdown({ container: 'body' });
     $(document).ready(function() {

@@ -7,7 +7,7 @@
                 <div class="media block-update-card">
                     <a class="pull-left" href="#">
                         @if($caregiver->profile_picture != null)
-                            <img class="pull-left update-card-MDimentions" src="{{ $caregiver->profile_picture }}" alt="">
+                            <img class="img-thumbnail pull-left update-card-MDimentions" src="{{URL::asset($caregiver->profile_picture)}}" alt="">
                         @else
                             <img class="pull-left update-card-MDimentions" src="{{URL::asset('assets/img/default_profile_avatar.jpg')}}" alt="">
                         @endif
@@ -50,8 +50,8 @@
                         @endif
                     </div>
                     <div class="card-action-pellet btn-toolbar pull-right" role="toolbar">
-                        <a class="btn-group btn-grey" href="/caregiver/favorite/{{ $caregiver->user_id }}"><i class="fa fa-heart"></i></a>
-                        <a class="btn-group btn-grey" href="/message/{{ $caregiver->user_id }}"><i class="btn-group fa fa-envelope"></i></a>
+                        <a title="Add to Favorites" data-toggle="tooltip" data-placement="bottom" class="btn-group btn-grey" href="/caregiver/favorite/{{ $caregiver->user_id }}"><i class="fa fa-heart"></i></a>
+                        <a title="Message" data-toggle="tooltip" data-placement="bottom" class="btn-group btn-grey" href="/message/{{ $caregiver->user_id }}"><i class="btn-group fa fa-envelope"></i></a>
                     </div>
                 </div>
             </div>

@@ -24,7 +24,6 @@ class CaregiverController extends Controller
             $caregiver->name = $user->name;
             $caregiver->email = $user->email;
             $caregiver->profile_picture = $user->profile_picture;
-            //$caregiver->user_id = $user->id;
             $caregiver->last_login = $user->last_login;
             $caregiver->bio = str_limit($caregiver->bio, $limit = 180, $end = '...');
         }
@@ -53,7 +52,7 @@ class CaregiverController extends Controller
         if ($user && !$user->is_parent) {
             $this->validate($request, [
                 'bio' => 'max:500',
-                'zip_code' => 'size:5',
+                'zip_code' => 'integer|max:99999',
             ]);
             $caregiver = Caregiver::where('user_id', $user->id)->first();
             $caregiver->bio = $request->get('bio');

@@ -1,7 +1,6 @@
 @extends('layouts.master')
 
 @section('content')
-
 <div class="panel-group panel-primary">
     <div class="panel-heading"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Create New Job</div>
     <div class="panel-body">
@@ -34,13 +33,13 @@
                 </div>
             </div>
             <div class='form-group row'>
-                <label class="col-sm-2 control-label" title="Location of where the care is needed." data-toggle="tooltip" data-placement="top">ZIP Code</label>
+                <label class="col-sm-2 control-label" title="Where will the care be needed?" data-toggle="tooltip" data-placement="top">ZIP Code</label>
                 <div class="col-sm-4">
                     <input class="form-control" type='number' name='zip_code' value='{{ old('zip_code') }}'>
                 </div>
             </div>
             <div class='form-group row'>
-                <label class="col-sm-2 control-label" title="Education level required of the caregiver." data-toggle="tooltip" data-placement="top">Education Level</label>
+                <label class="col-sm-2 control-label" title="What education level do you require of the caregiver?" data-toggle="tooltip" data-placement="top">Education Level</label>
                 <div class="col-sm-4">
                     <select class="form-control"  name="education_level_id">
                         @foreach ($education_levels as $key => $value)
@@ -50,13 +49,26 @@
                 </div>
             </div>
             <div class='form-group row'>
-                <label class="col-sm-2 control-label" title="Range looking to pay the caregiver." data-toggle="tooltip" data-placement="top">Hourly Rate</label>
+                <label class="col-sm-2 control-label" title="How much are you looking to pay the caregiver?" data-toggle="tooltip" data-placement="top">Hourly Rate</label>
                 <div class="col-sm-4">
                     <select class="form-control"  name="hourly_rate_id">
                         @foreach ($hourly_rates as $key => $value)
                         <option value="{{ $key }}">{{ $value }}</option>
                         @endforeach
                     </select>
+                </div>
+            </div>
+            <div class='form-group row'>
+                <label class="col-sm-2 control-label" title="What language(s) would you like spoken at home?" data-toggle="tooltip" data-placement="top">Languages</label>
+                <div class="col-sm-4">
+                    <select multiple class="form-control"  name="language_ids[]">
+                    @foreach ($languages as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
+                    </select>
+                    <!--<select multiple data-role="tagsinput" class="form-control"  name="language_ids" id="language_ids">
+                        <option value="English"></option>
+                    </select>-->
                 </div>
             </div>
             <div class="form-group row">

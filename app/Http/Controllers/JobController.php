@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Job;
+use App\LanguageJob;
 use Auth;
 use App\User;
 use App\Guardian;
@@ -28,22 +29,20 @@ class JobController extends Controller
         $uic = new UserInputsController();
         $rates = $uic->getHourlyRates();;
         $education_level = $uic->getEducationLevels();;
-        return view('job.create', ['hourly_rates'=> $rates, 'education_levels' => $education_level]);
+        $languages = $uic->getLanguages();;
+        return view('job.create', ['hourly_rates'=> $rates, 'education_levels' => $education_level, 'languages' => $languages]);
     }
     
     public function create(Request $request){
-        //validate request
         $this->validate($request, [
             'title' => 'required|max:50',
             'description' => 'required|max:500',
             'num_children' => 'required|min:1|max:7',
-            'zip_code' => 'required|integer|min:00501|max:99999',
+            'zip_code' => 'required|integer|max:99999',
             'hourly_rate_id' => 'required',
         ]);
-        //get guardian
         $user = Auth::user();
         $guardian = Guardian::where('user_id',$user->id)->first();
-        //create job
         if($guardian !== null) {
             $job = new Job();
             $job->setAttribute('parent_id', $guardian->id);
@@ -53,7 +52,17 @@ class JobController extends Controller
             $job->setAttribute('zip_code', $request->get('zip_code'));
             $job->setAttribute('hourly_rate_id', $request->get('hourly_rate_id'));
             $job->setAttribute('education_level_id', $request->get('education_level_id'));
+            $languages = $request->get('language_ids');
             $job->save();
+            dump($languages);
+            if($languages != null){
+                foreach($languages as $val) {
+                    $lang = new LanguageJob();
+                    $lang->setAttribute('job_id', $job->getAttribute("id"));
+                    $lang->setAttribute('language_id', $val);
+                    $lang->save();
+                }
+            }
         }
         $job->setAttribute('user_name',$user->name);
         $job->setAttribute('user_profile_picture',$user->profile_picture);
@@ -73,7 +82,13 @@ class JobController extends Controller
             ->leftJoin('guardians', 'jobs.parent_id', '=', 'guardians.id')
             ->leftJoin('users', 'guardians.user_id', '=', 'users.id')
             ->first();
-        return view('job.show')->with('job', $job);
+        $languages = DB::table('language_jobs')
+            ->select('user_inputs.subcategory as language')
+            ->leftJoin('jobs', 'jobs.id', '=', 'language_jobs.job_id')
+            ->leftJoin('user_inputs', 'language_jobs.language_id', '=', 'user_inputs.id')
+            ->where('jobs.id',$id)
+            ->get();
+        return view('job.show', ['job' => $job, 'languages'=> $languages]);
     }
 
     public function getMyJobs(){

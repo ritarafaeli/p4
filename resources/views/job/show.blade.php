@@ -7,7 +7,7 @@
                 <div class="media block-update-card">
                     <a class="pull-left" href="#">
                         @if($job->profile_picture != null)
-                            <img class="pull-left update-card-MDimentions" src="{{ $job->profile_picture }}" alt="">
+                            <img class="img-thumbnail pull-left update-card-MDimentions" src="{{ URL::asset($job->profile_picture) }}" alt="">
                         @else
                             <img class="pull-left update-card-MDimentions" src="{{URL::asset('assets/img/default_profile_avatar.jpg')}}" alt="">
                         @endif
@@ -23,6 +23,13 @@
                             <li><i class="fa fa-li fa-child"></i> {{ $job->num_children === 1 ? '1 child' : $job->num_children . ' children'}}.</li>
                             @if(!$job->is_smoker)
                                 <li><i class="fa-li fa fa-check-square"></i> No smokers please.</li>
+                            @endif
+                            @if(isset($languages))
+                                <li><i class="fa-li fa fa-check-square"></i><b>Languages:</b>
+                                @foreach($languages as $language)
+                                    {{ $language->language }},
+                                @endforeach
+                                </li>
                             @endif
                         </ul>
                     </div>
