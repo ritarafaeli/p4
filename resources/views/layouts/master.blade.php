@@ -1,27 +1,32 @@
 <!DOCTYPE html>
 <html lang="en-us" ng-app="myApp">
 <head>
+    <meta charset="utf-8">
     <title>Find a Babysitter</title>
     <!--AngularJS-->
-    <script type="text/javascript" src="assets/js/angular.min.js"></script>
+    <!--<script type="text/javascript" src="assets/js/angular.min.js"></script>
     <script type="text/javascript" src="assets/js/angular-route.min.js"></script>
-    <script type="text/javascript" src="assets/js/app.js"></script>
+    <script type="text/javascript" src="assets/js/app.js"></script>-->
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
     <!-- Styling -->
     <link rel="stylesheet" href="{{URL::asset('assets/css/main.css')}}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("body").tooltip({ selector: '[data-toggle=tooltip]' });
-        });
-    </script>
-
 </head>
 <body>
+<script src="{{URL::asset('assets/js/jquery-1.12.3.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/bootstrap/bootstrap.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/bootstrap/dropdown.js')}}"></script>
+<script src="{{URL::asset('assets/js/bootstrap/tooltip.js')}}"></script>
+<script type="text/javascript">
+    //$('.my-dropdown').dropdown();
+    //$('.my-tooltip').tooltip();
+    $('[data-toggle~="tooltip"]').tooltip({ container: 'body' });
+    $('[data-toggle~="dropdown"]').dropdown({ container: 'body' });
+    $(document).ready(function() {
+        $("body").tooltip({ selector: '[data-toggle=tooltip]' });
+    });
+</script>
 <div class="panel panel-default" ng-controller="mainController">
     <nav class = "navbar navbar-inverse">
         <div class="navbar-header">
@@ -45,7 +50,7 @@
                         <li><a href="/profile">My Profile</a></li>
                         <li><a href="/jobs">Jobs</a></li>
                     @endif
-                    <li><a href="#">Inbox <span class="badge">11</span></a></li>
+                    <!--<li><a href="#">Inbox <span class="badge">11</span></a></li>-->
                     <li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
                 @else
                     <li><a href="/login"><i class="fa fa-sign-in"></i> Login</a></li>

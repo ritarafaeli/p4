@@ -1,53 +1,48 @@
 @extends('layouts.master')
 
 @section('content')
+    @if(isset($job))
+        <div class="row">
+            <div class="col-md-4">
+                <div class="media block-update-card">
+                    <a class="pull-left" href="#">
+                        @if($job->profile_picture != null)
+                            <img class="pull-left update-card-MDimentions" src="{{ $job->profile_picture }}" alt="">
+                        @else
+                            <img class="pull-left update-card-MDimentions" src="{{URL::asset('assets/img/default_profile_avatar.jpg')}}" alt="">
+                        @endif
+                    </a>
+                    <div class="media-body update-card-body">
+                        <h4 class="media-heading text-center">{{ $job->title }}</h4>
+                        <p><b>Description: </b>{{ $job->description }}</p>
+                        <ul class="fa-ul">
+                            <li><i class="fa fa-li fa-usd" aria-hidden="true"></i> Hourly Range is {{ $job->hourly_rate_id }}.</li>
+                            @if($job->education_level !== null)
+                                <li><i class="fa-li fa fa-graduation-cap"></i> Requires {{ $job->education_level }}.</li>
+                            @endif
+                            <li><i class="fa fa-li fa-child"></i> {{ $job->num_children === 1 ? '1 child' : $job->num_children . ' children'}}.</li>
+                            @if(!$job->is_smoker)
+                                <li><i class="fa-li fa fa-check-square"></i> No smokers please.</li>
+                            @endif
+                        </ul>
+                    </div>
+                    <div class="caregiver-card-features pull-left" role="toolbar">
+                        @if($job->is_driver)
+                            <i title="Requires Transportation" data-toggle="tooltip" data-placement="bottom" class="fa fa-car fa-lg"></i>
+                        @endif
+                        @if($job->is_cpr_certified)
+                            <i title="Requires CPR Certification" data-toggle="tooltip" data-placement="bottom" class="fa fa-heartbeat fa-lg"></i>
+                        @endif
+                    </div>
+                    <div class="card-action-pellet btn-toolbar pull-right" role="toolbar">
+                        <a class="btn-group btn-grey" href="/favorite/{{ $job->user_id }}"><i class="fa fa-heart"></i></a>
+                        <a class="btn-group btn-grey" href="/message/{{ $job->user_id }}"><i class="btn-group fa fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-<div class="panel panel-default">
-    <div class="panel-heading">{{ $job->title }}</div>
-    <div class="panel-body">
-        <p>{{ $job->description }}</p>
-    </div>
-    <ul class="list-group">
-        <li class="list-group-item">
-            <label>Number of Children: </label><span>{{ $job->num_children }}</span>
-        </li>
-        <li class="list-group-item">
-            <label>ZIP: </label><span>{{ $job->zip_code }}</span>
-        </li>
-        <li class="list-group-item">
-            <label>Hourly Rate: </label><span>{{ $job->hourly_rate_id }}</span></li>
-        <li class="list-group-item">
-            <label>Education Level: </label><span>{{ $job->education_level_id }}</span>
-        </li>
-        <li class="list-group-item">
-            <label>Smoker: </label><span>{{ $job->is_smoker ? "Yes" : "No" }}</span>
-        </li>
-        <li class="list-group-item">
-            <label>Drives Car: </label><span>{{ $job->is_driver ? "Yes" : "No" }}</span>
-        </li>
-        <li class="list-group-item">
-            <label>CPR Certified: </label><span>{{ $job->is_cpr_certified ? "Yes" : "No" }}</span>
-        </li>
-    </ul>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-heading">Contact Information</div>
-    <ul class="list-group">
-        <li class="list-group-item">
-            @if($job->user_profile_picture != null)
-                <img class="img-thumbnail img-responsive img-left" src="{{ $job->user_profile_picture }}" alt="">
-            @else
-                <img class="img-thumbnail img-responsive img-left" src="http://placehold.it/200x200" alt="">
-            @endif
-        </li>
-        <li class="list-group-item">
-            <label>Name: </label><span>{{ $job->user_name }}</span>
-        </li>
-        <li class="list-group-item">
-            <label>Email: </label><span>{{ $job->user_email }}</span>
-        </li>
-    </ul>
-</div>
-
+    @else
+        <p>Sorry, job does not exist.</p>
+    @endif
 @stop

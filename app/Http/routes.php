@@ -25,6 +25,7 @@ Route::group(['middleware' => ['web']], function () {
         #Routes for all users
         Route::get('/account', function(){ return view('account');});# Show account information
         Route::post('/account', 'AccountController@updateAccount');# Update account information
+        Route::get('/favorite/{id}', 'StarController@toggle');# Update account information
 
         #Routes for caregivers
         Route::get('/jobs', 'JobController@index');# Show list of jobs

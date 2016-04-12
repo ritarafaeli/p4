@@ -2,22 +2,19 @@
 
 @section('content')
 
-    @if(count($errors) > 0)
-        <ul class='errors'>
-            @foreach ($errors->all() as $error)
-                <li><span class='fa fa-exclamation-circle'></span> <div class="error">{{ $error }}</div></li>
-            @endforeach
-        </ul>
-    @endif
+
 
     <div class="well col-xs-7">
         <div class="panel-group panel-primary">
             <div class="panel-heading"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Register</div>
             <div class="panel-body">
-                <div class='alert alert-danger' role="alert" ng-show="errors">
-                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                    Please correct the form errors below and try again.
-                </div>
+            @if(count($errors) > 0)
+                <ul class="fa-ul error">
+                    @foreach ($errors->all() as $error)
+                        <li><i class="fa fa-li fa-exclamation-circle" aria-hidden="true"></i>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
                 <form method='POST' action='/register'>
                     {!! csrf_field() !!}
                     <div class="input-group">

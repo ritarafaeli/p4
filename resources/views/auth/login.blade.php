@@ -6,13 +6,13 @@
         <div class="row">
             <div class="col-xs-12"><h3>Login</h3></div>
         </div>
-        @if(count($errors) > 0)
-            <ul class='errors'>
-                @foreach ($errors->all() as $error)
-                    <li><span class='fa fa-exclamation-circle'></span> {{ $error }}</li>
-                @endforeach
-            </ul>
-        @endif
+    @if(count($errors) > 0)
+        <ul class="fa-ul error">
+            @foreach ($errors->all() as $error)
+                <li><i class="fa fa-li fa-exclamation-circle" aria-hidden="true"></i>{{ $error }}</li>
+            @endforeach
+        </ul>
+    @endif
         <form method='POST' action='/login'>
             {!! csrf_field() !!}
             <div class="input-group margin-bottom-sm">

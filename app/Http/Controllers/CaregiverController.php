@@ -19,7 +19,6 @@ class CaregiverController extends Controller
         $caregivers = DB::table('caregivers')
             ->select('caregivers.*','user_inputs.subcategory as education_level')
             ->leftJoin('user_inputs', 'caregivers.education_level_id', '=', 'user_inputs.id')->get();
-        //dump($caregivers);
         foreach($caregivers as $caregiver) {
             $user = User::find($caregiver->user_id);
             $caregiver->name = $user->name;

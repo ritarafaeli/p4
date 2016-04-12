@@ -7,6 +7,7 @@ use Auth;
 use App\User;
 use App\Guardian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Controllers\UserInputsController;
 
@@ -15,14 +16,11 @@ use App\Http\Requests;
 class JobController extends Controller
 {
     public function index(){
-        //get all jobs
-        $jobs = Job::all();
-        //add user's profile picture to each job
-        foreach($jobs as $job) {
-            $guardian = Guardian::find($job->parent_id);
-            $user = User::find($guardian->user_id);
-            $job->user_profile_picture = $user->profile_picture;
-        }
+        $jobs = DB::table('jobs')
+            ->select('jobs.*', 'users.profile_picture as user_profile_picture')
+            ->leftJoin('guardians', 'jobs.parent_id', '=', 'guardians.id')
+            ->leftJoin('users', 'guardians.user_id', '=', 'users.id')
+            ->get();
         return view('job.list')->with('jobs', $jobs);
     }
 
@@ -67,23 +65,26 @@ class JobController extends Controller
     }
 
     public function show($id){
-        $job = Job::find($id);
-        $guardian = Guardian::find($job->parent_id);
-        $user = User::find($guardian->user_id);
-        $job->user_name = $user->name;
-        $job->user_email = $user->email;
-        $job->user_profile_picture = $user->profile_picture;
+        $job = DB::table('jobs')
+            ->select('jobs.*','user_inputs.subcategory as education_level', 'users.name as name', 'users.email as email',
+                'users.profile_picture as profile_picture', 'users.id as user_id')
+            ->where('jobs.id',$id)
+            ->leftJoin('user_inputs', 'jobs.education_level_id', '=', 'user_inputs.id')
+            ->leftJoin('guardians', 'jobs.parent_id', '=', 'guardians.id')
+            ->leftJoin('users', 'guardians.user_id', '=', 'users.id')
+            ->first();
         return view('job.show')->with('job', $job);
     }
 
     public function getMyJobs(){
         $user = Auth::user();
-        $guardian = Guardian::where('user_id',$user->id)->first();
-        if($guardian !== null) {
-            $jobs = Job::where('parent_id', $guardian->id)->get();
-            return view('job.all')->with('jobs', $jobs);
-        }
-        return view('welcome');
+        $jobs = DB::table('jobs')
+            ->select('jobs.*')
+            ->where('users.id',$user->id)
+            ->leftJoin('guardians', 'jobs.parent_id', '=', 'guardians.id')
+            ->leftJoin('users', 'guardians.user_id', '=', 'users.id')
+            ->get();
+        return view('job.all')->with('jobs', $jobs);
     }
 
     public function edit($id){
@@ -122,9 +123,7 @@ class JobController extends Controller
             return $this->getMyJobs();
         }
         return view('welcome');
-
     }
-
     public function destroy($id){
         $user = Auth::user();
         $job = Job::find($id);
