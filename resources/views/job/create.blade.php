@@ -17,25 +17,25 @@
             <div class='form-group row'>
                 <label class="col-sm-2 control-label" title="Job Title will be viewable in search." data-toggle="tooltip" data-placement="top">Title</label>
                 <div class="col-sm-4">
-                    <input class="form-control" type='text' name='title' value='{{ old('title') }}'>
+                    <input class="form-control" type='text' name='title'  value="Looking For a Caretaker For My Child" value='{{ old('title') }}'>
                 </div>
             </div>
             <div class='form-group row'>
                 <label class="col-sm-2 control-label" title="Brief description of the job requirements." data-toggle="tooltip" data-placement="top">Description</label>
                 <div class="col-sm-4">
-                    <input type='text' class="form-control" name='description' value='{{ old('description') }}'>
+                    <textarea class="form-control"  name='description' value='{{ old('description') }}' rows="3"></textarea>
                 </div>
             </div>
             <div class='form-group row'>
                 <label class="col-sm-2 control-label" title="How many children do you need a caregiver for?" data-toggle="tooltip" data-placement="top">Number of Children</label>
                 <div class="col-sm-4">
-                    <input class="form-control" type='number' name='num_children' value='{{ old('num_children') }}'>
+                    <input class="form-control" type='number' name='num_children' value='{{ old('num_children') || 1}}'>
                 </div>
             </div>
             <div class='form-group row'>
                 <label class="col-sm-2 control-label" title="Where will the care be needed?" data-toggle="tooltip" data-placement="top">ZIP Code</label>
                 <div class="col-sm-4">
-                    <input class="form-control" type='number' name='zip_code' value='{{ old('zip_code') }}'>
+                    <input class="form-control" type='text' name='zip_code' value='{{ old('zip_code') }}'>
                 </div>
             </div>
             <div class='form-group row'>

@@ -8,7 +8,7 @@
     <script type="text/javascript" src="assets/js/app.js"></script>-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <link rel="stylesheet" href="{{URL::asset('assets/css/main.css')}}">
-    <!--<link rel="stylesheet" href="assets/css/bootstrap-tagsinput.css">-->
+    <link rel="stylesheet" href="assets/css/bootstrap-tagsinput.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/flick/jquery-ui.css">
 </head>
@@ -18,7 +18,7 @@
 <script src="{{URL::asset('assets/js/bootstrap/bootstrap.min.js')}}"></script>
 <script src="{{URL::asset('assets/js/bootstrap/dropdown.js')}}"></script>
 <script src="{{URL::asset('assets/js/bootstrap/tooltip.js')}}"></script>
-<!--<script src="assets/js/bootstrap/bootstrap-tagsinput.min.js"></script>-->
+<script src="assets/js/bootstrap/bootstrap-tagsinput.min.js"></script>
 
 <script type="text/javascript">
     $('[data-toggle~="tooltip"]').tooltip({ container: 'body' });
@@ -48,7 +48,7 @@
                         <li><a href="/newjob"><i class="fa fa-plus-circle"></i> New Job</a></li>
                     @else
                         <li><a href="/profile">My Profile</a></li>
-                        <li><a href="/jobs">Jobs</a></li>
+                        <li><i class="fa fa-list-alt"></i> <a href="/jobs">Jobs</a></li>
                     @endif
                     <!--<li><a href="#">Inbox <span class="badge">11</span></a></li>-->
                     <li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a>

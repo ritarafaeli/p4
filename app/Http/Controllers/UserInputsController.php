@@ -7,14 +7,24 @@ use App\Http\Requests;
 
 class UserInputsController extends Controller
 {
+    private $languages;
+    private $education_levels;
+    private $hourly_rates;
+
+    public function __construct()
+    {
+        $this->languages = UserInput::where('category','Language')->orderBy('category')->pluck('subcategory', 'id');
+        $this->education_levels = UserInput::where('category','Education')->pluck('subcategory', 'id');
+        $this->hourly_rates = UserInput::where('category','HourlyRate')->pluck('subcategory', 'id');
+    }
     public function getLanguages(){
-        return UserInput::where('category','Language')->orderBy('category')->pluck('subcategory', 'id');
+        return $this->languages;
     }
     public function getEducationLevels(){
-        return UserInput::where('category','Education')->pluck('subcategory', 'id');
+        return $this->education_levels;
     }
     public function getHourlyRates(){
-        return UserInput::where('category','HourlyRate')->pluck('subcategory', 'id');
+        return $this->hourly_rates;
     }
     public function getSubcategoryById($id){
         return UserInput::find($id)->get();
