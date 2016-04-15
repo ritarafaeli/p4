@@ -149,12 +149,15 @@ class JobController extends Controller
         }
         return view('welcome');
     }
+
     public function destroy($id){
         $user = Auth::user();
         $job = Job::find($id);
-        $guardian = Guardian::find($job->parent_id);
-        if($guardian->id === $job->parent_id) {
-            $job->delete();
+        if($job !== null) {
+            $guardian = Guardian::find($job->parent_id);
+            if (Auth::user()->id === $guardian->user_id) {
+                $job->delete();
+            }
         }
         return $this->getMyJobs();
     }
