@@ -108,7 +108,10 @@ class JobController extends Controller
     public function edit($id){
         $job = Job::find($id);
         $guardian = Guardian::find($job->parent_id);
-        if(Auth::user()->id === $guardian->user_id){
+        $user = Auth::user();
+dump($user);   
+dump($guardian);    
+if($user->id === $guardian->user_id){
             $rates = $this->uic->getHourlyRates();
             $education_level = $this->uic->getEducationLevels();
             $languages = $this->uic->getLanguages();
@@ -121,7 +124,7 @@ class JobController extends Controller
             return view('job.edit', ['job' => $job, 'hourly_rates'=> $rates, 'education_levels' => $education_level,
                 'languages' => $languages, 'selected_languages' => $selected_languages]);
         }
-        return view('welcome');
+        //return view('welcome');
     }
 
     public function update(Request $request, $id){
