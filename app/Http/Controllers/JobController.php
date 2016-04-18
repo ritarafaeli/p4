@@ -135,22 +135,28 @@ class JobController extends Controller
             'zip_code' => 'required|integer|min:00501|max:99999',
             'hourly_rate_id' => 'required',
         ]);
-        $job = Job::find($id);
-        $guardian = Guardian::find($job->parent_id);
-        if(Auth::user()->id === $guardian->user_id){
-            $job->setAttribute('title', $request->get('title'));
-            $job->setAttribute('description', $request->get('description'));
-            $job->setAttribute('num_children', $request->get('num_children'));
-            $job->setAttribute('zip_code', $request->get('zip_code'));
-            $job->setAttribute('is_smoker', $request->get('is_smoker') !== null);
-            $job->setAttribute('is_driver', $request->get('is_driver') !== null);
-            $job->setAttribute('is_cpr_certified', $request->get('is_cpr_certified') != null);
-            $job->setAttribute('hourly_rate_id', $request->get('hourly_rate_id'));
-            $job->setAttribute('education_level_id', $request->get('education_level_id'));
+        $job = DB::table('jobs')
+            ->select('jobs.*')
+            ->where('jobs.id',$id)
+            ->where('users.id',Auth::user()->id)
+            ->leftJoin('guardians', 'jobs.parent_id', '=', 'guardians.id')
+            ->leftJoin('users', 'guardians.user_id', '=', 'users.id')
+            ->first();
+        if($job !== null){
+            $job = Job::find($id);
+            $job->title = $request->get('title');
+            $job->description = $request->get('description');
+            $job->num_children = $request->get('num_children');
+            $job->zip_code = $request->get('zip_code');
+            $job->is_smoker = $request->get('is_smoker') !== null;
+            $job->is_driver = $request->get('is_driver') !== null;
+            $job->is_cpr_certified = $request->get('is_cpr_certified') != null;
+            $job->hourly_rate_id = $request->get('hourly_rate_id');
+            $job->education_level_id = $request->get('education_level_id');
             $job->save();
             return $this->getMyJobs();
         }
-        return view('welcome');
+        return $this->getMyJobs();
     }
 
     public function destroy($id){
