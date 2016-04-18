@@ -72,10 +72,6 @@ class JobController extends Controller
         }
         return $this->show($job->id);
     }
-
-    public function store(Request $request){
-    }
-
     public function show($id){
         $job = DB::table('jobs')
             ->select('jobs.*','user_inputs.subcategory as education_level', 'users.name as name', 'users.email as email',
@@ -106,12 +102,16 @@ class JobController extends Controller
     }
 
     public function edit($id){
-        $job = Job::find($id);
-        $guardian = Guardian::find($job->parent_id);
-        $user = Auth::user();
-dump($user);   
-dump($guardian);    
-if($user->id === $guardian->user_id){
+        $job = DB::table('jobs')
+            ->select('jobs.*','user_inputs.subcategory as education_level', 'users.name as name', 'users.email as email',
+                'users.profile_picture as profile_picture', 'users.id as user_id')
+            ->where('jobs.id',$id)
+            ->where('users.id',Auth::user()->id)
+            ->leftJoin('user_inputs', 'jobs.education_level_id', '=', 'user_inputs.id')
+            ->leftJoin('guardians', 'jobs.parent_id', '=', 'guardians.id')
+            ->leftJoin('users', 'guardians.user_id', '=', 'users.id')
+            ->first();
+        if($job !== null){
             $rates = $this->uic->getHourlyRates();
             $education_level = $this->uic->getEducationLevels();
             $languages = $this->uic->getLanguages();
@@ -124,7 +124,7 @@ if($user->id === $guardian->user_id){
             return view('job.edit', ['job' => $job, 'hourly_rates'=> $rates, 'education_levels' => $education_level,
                 'languages' => $languages, 'selected_languages' => $selected_languages]);
         }
-        //return view('welcome');
+        return view('welcome');
     }
 
     public function update(Request $request, $id){
@@ -154,13 +154,16 @@ if($user->id === $guardian->user_id){
     }
 
     public function destroy($id){
-        $user = Auth::user();
-        $job = Job::find($id);
+        $job = DB::table('jobs')
+            ->select('jobs.*')
+            ->where('jobs.id',$id)
+            ->where('users.id',Auth::user()->id)
+            ->leftJoin('guardians', 'jobs.parent_id', '=', 'guardians.id')
+            ->leftJoin('users', 'guardians.user_id', '=', 'users.id')
+            ->first();
         if($job !== null) {
-            $guardian = Guardian::find($job->parent_id);
-            if (Auth::user()->id === $guardian->user_id) {
-                $job->delete();
-            }
+            $job = Job::find($id);
+            $job->delete();
         }
         return $this->getMyJobs();
     }
