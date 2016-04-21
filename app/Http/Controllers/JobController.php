@@ -90,6 +90,13 @@ class JobController extends Controller
         return view('job.show', ['job' => $job, 'languages'=> $languages]);
     }
 
+    public function search(Request $request){
+
+    }
+    public function filter(Request $request){
+
+    }
+
     public function getMyJobs(){
         $user = Auth::user();
         $jobs = DB::table('jobs')

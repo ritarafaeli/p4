@@ -1,7 +1,21 @@
 @extends('layouts.master')
 
 @section('content')
-    <h4><i class="fa fa-list-alt"></i> Jobs</h4>
+    <div class="row">
+        <div class="pull-left col-md-8">
+            <h4><i class="fa fa-list-alt"></i> Jobs</h4>
+        </div>
+        <div class="pull-right col-md-4">
+            <form class="form-inline" method='POST' action='/jobs/search'>
+                {!! csrf_field() !!}
+                <div class="form-group input-group margin-bottom-sm">
+                    <span class="input-group-addon"><i class="fa fa-search fa-fw" title="Search All Jobs" data-toggle="tooltip" data-placement="left"></i></span>
+                    <input name='search' class="form-control" type="text" placeholder="Search" value='{{ old('search') }}'>
+                </div>
+                <button type='submit' class='btn btn-default'>Go</button>
+            </form>
+        </div>
+    </div>
 @if(isset($jobs))
     @foreach($jobs as $job)
         <div class="row">

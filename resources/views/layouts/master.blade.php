@@ -48,7 +48,7 @@
                         <li><a href="/newjob"><i class="fa fa-plus-circle"></i> New Job</a></li>
                     @else
                         <li><a href="/profile">My Profile</a></li>
-                        <li><i class="fa fa-list-alt"></i> <a href="/jobs">Jobs</a></li>
+                        <li><a href="/jobs"><i class="fa fa-list-alt"></i> Jobs</a></li>
                     @endif
                     <!--<li><a href="#">Inbox <span class="badge">11</span></a></li>-->
                     <li><a href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
