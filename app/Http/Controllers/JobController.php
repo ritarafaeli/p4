@@ -126,8 +126,10 @@ class JobController extends Controller
                 ->select('user_inputs.subcategory as language')
                 ->leftJoin('jobs', 'jobs.id', '=', 'language_jobs.job_id')
                 ->leftJoin('user_inputs', 'language_jobs.language_id', '=', 'user_inputs.id')
-                ->where('jobs.id',$id)
+                ->where('jobs.id','=',$id)
                 ->get();
+            dump($languages);
+            dump($selected_languages);
             return view('job.edit', ['job' => $job, 'hourly_rates'=> $rates, 'education_levels' => $education_level,
                 'languages' => $languages, 'selected_languages' => $selected_languages]);
         }

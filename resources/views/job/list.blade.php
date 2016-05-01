@@ -21,12 +21,12 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="media block-update-card">
-                    <a class="pull-left" href="#">
-                        @if($job->profile_picture != null)
-                            <img class="img-thumbnail pull-left update-card-MDimentions" src="{{ URL::asset($job->profile_picture) }}" alt="">
-                        @else
-                            <img class="pull-left update-card-MDimentions" src="{{URL::asset('assets/img/default_profile_avatar.jpg')}}" alt="">
-                        @endif
+                    <a class="pull-left" href="/job/{{ $job->id }}">
+                    @if($job->profile_picture != null)
+                        <img class="img-thumbnail pull-left update-card-MDimentions" src="{{ URL::asset($job->profile_picture) }}" alt="">
+                    @else
+                        <img class="pull-left update-card-MDimentions" src="{{URL::asset('assets/img/default_profile_avatar.jpg')}}" alt="">
+                    @endif
                     </a>
                     <div class="media-body update-card-body">
                         <h4 class="media-heading text-center">{{ $job->title }}</h4>
@@ -59,7 +59,7 @@
                     </div>
                     <div class="card-action-pellet btn-toolbar pull-right" role="toolbar">
                         <a class="btn-group btn-grey" href="/favorite/{{ $job->user_id }}"><i class="btn-group fa fa-heart"></i></a>
-                        <a class="btn-group btn-grey" href="/message/{{ $job->user_id }}"><i class="btn-group fa fa-envelope"></i></a>
+                        <a class="btn-group btn-grey" href="mailto:{{ $job->email }}?Subject='Interested in Babysitter Job'"><i class="btn-group fa fa-envelope"></i></a>
                     </div>
                 </div>
             </div>

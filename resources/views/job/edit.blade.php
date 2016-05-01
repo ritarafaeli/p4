@@ -62,8 +62,17 @@
                     <label class="col-sm-2 control-label" title="What language(s) would you like spoken at home?" data-toggle="tooltip" data-placement="top">Languages</label>
                     <div class="col-sm-4">
                         <select multiple data-role="tagsinput" class="form-control"  name="language_ids[]">
-                        @foreach($selected_languages as $language)
-                            <option value="{{ $language->language }}">{{ $language->language }}</option>
+
+                        @foreach($languages as $lid => $lname)
+                            <label>
+                                <input
+                                        type='checkbox'
+                                        value='{{ $lid }}'
+                                        name='language_ids[]'
+                                        {{ (in_array($lname,$selected_languages)) ? 'CHECKED' : '' }}
+                                >
+                                {{$lname}}
+                            </label>
                         @endforeach
                         </select>
                     </div>

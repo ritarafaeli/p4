@@ -51,7 +51,7 @@
                     </div>
                     <div class="card-action-pellet btn-toolbar pull-right" role="toolbar">
                         <a title="Add to Favorites" data-toggle="tooltip" data-placement="bottom" class="btn-group btn-grey" href="/caregiver/favorite/{{ $caregiver->user_id }}"><i class="fa fa-heart"></i></a>
-                        <a title="Message" data-toggle="tooltip" data-placement="bottom" class="btn-group btn-grey" href="/message/{{ $caregiver->user_id }}"><i class="btn-group fa fa-envelope"></i></a>
+                        <a title="Message" data-toggle="tooltip" data-placement="bottom" class="btn-group btn-grey" href="mailto:{{ $caregiver->email }}?Subject='Looking for a Babysitter'"><i class="fa fa-envelope"></i></a>
                     </div>
                 </div>
             </div>
