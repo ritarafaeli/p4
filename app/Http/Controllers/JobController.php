@@ -31,6 +31,14 @@ class JobController extends Controller
             ->leftJoin('guardians', 'jobs.parent_id', '=', 'guardians.id')
             ->leftJoin('users', 'guardians.user_id', '=', 'users.id')
             ->get();
+
+        //TODO: return languages
+        /*$languages = DB::table('language_jobs')
+            ->select('user_inputs.subcategory as language')
+            ->leftJoin('jobs', 'jobs.id', '=', 'language_jobs.job_id')
+            ->leftJoin('user_inputs', 'language_jobs.language_id', '=', 'user_inputs.id')
+            ->where('jobs.id',$id)
+            ->get();*/
         return view('job.list')->with('jobs', $jobs);
     }
 
