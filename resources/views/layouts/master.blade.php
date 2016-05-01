@@ -15,6 +15,7 @@
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.12/jquery-ui.min.js" type="text/javascript" charset="utf-8"></script>
 <script src="{{URL::asset('assets/js/jquery-1.12.3.min.js')}}"></script>
+<script src="{{URL::asset('assets/js/multiselect.min.js')}}"></script>
 <script src="{{URL::asset('assets/js/bootstrap/bootstrap.min.js')}}"></script>
 <script src="{{URL::asset('assets/js/bootstrap/dropdown.js')}}"></script>
 <script src="{{URL::asset('assets/js/bootstrap/tooltip.js')}}"></script>

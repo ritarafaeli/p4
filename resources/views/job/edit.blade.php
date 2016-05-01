@@ -1,6 +1,16 @@
 @extends('layouts.master')
 
 @section('content')
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $('#search').multiselect({
+                search: {
+                    left: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
+                    right: '<input type="text" name="q" class="form-control" placeholder="Search..." />',
+                }
+            });
+        });
+    </script>
     <div class="panel-group panel-primary">
         <div class="panel-heading"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit Job Listing</div>
         <div class="panel-body">
@@ -61,20 +71,34 @@
                 <div class='form-group row'>
                     <label class="col-sm-2 control-label" title="What language(s) would you like spoken at home?" data-toggle="tooltip" data-placement="top">Languages</label>
                     <div class="col-sm-4">
-                        <select multiple data-role="tagsinput" class="form-control"  name="language_ids[]">
+                        <div class="row">
+                            <div class="col-xs-5">
+                                <select name="from[]" id="search" class="form-control" size="8" multiple="multiple">
+                                    @foreach($languages as $lid => $lname)
+                                        @if(!array_key_exists($lid,$selected_languages))
+                                    <option value="{{ $lid }}">{{$lname}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
 
-                        @foreach($languages as $lid => $lname)
-                            <label>
-                                <input
-                                        type='checkbox'
-                                        value='{{ $lid }}'
-                                        name='language_ids[]'
-                                        {{ (array_key_exists($lid,$selected_languages)) ? 'CHECKED' : '' }}
-                                >
-                                {{$lname}}
-                            </label>
-                        @endforeach
-                        </select>
+                            <div class="col-xs-2">
+                                <button type="button" id="search_rightAll" class="btn btn-block"><i class="glyphicon glyphicon-forward"></i></button>
+                                <button type="button" id="search_rightSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
+                                <button type="button" id="search_leftSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
+                                <button type="button" id="search_leftAll" class="btn btn-block"><i class="glyphicon glyphicon-backward"></i></button>
+                            </div>
+
+                            <div class="col-xs-5">
+                                <select name="language_ids[]" id="search_to" class="form-control" size="8" multiple="multiple">
+                                    @foreach($languages as $lid => $lname)
+                                        @if(array_key_exists($lid,$selected_languages))
+                                            <option value="{{ $lid }}">{{$lname}}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class='form-group row'>
