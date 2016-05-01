@@ -69,7 +69,7 @@
                                         type='checkbox'
                                         value='{{ $lid }}'
                                         name='language_ids[]'
-                                        {{ (in_array($lname,$selected_languages)) ? 'CHECKED' : '' }}
+                                        {{ (array_key_exists($lid,$selected_languages)) ? 'CHECKED' : '' }}
                                 >
                                 {{$lname}}
                             </label>

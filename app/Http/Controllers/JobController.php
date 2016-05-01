@@ -9,6 +9,7 @@ use App\User;
 use App\Guardian;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\UserInput;
 
 use App\Http\Controllers\UserInputsController;
 
@@ -122,14 +123,12 @@ class JobController extends Controller
             $rates = $this->uic->getHourlyRates();
             $education_level = $this->uic->getEducationLevels();
             $languages = $this->uic->getLanguages();
-            $selected_languages = DB::table('language_jobs')
-                ->select('user_inputs.subcategory as language')
+            $selected_languages = UserInput::where('jobs.id','=',$id)
+                ->leftJoin('language_jobs', 'language_jobs.language_id', '=', 'user_inputs.id')
                 ->leftJoin('jobs', 'jobs.id', '=', 'language_jobs.job_id')
-                ->leftJoin('user_inputs', 'language_jobs.language_id', '=', 'user_inputs.id')
-                ->where('jobs.id','=',$id)
-                ->get();
-            dump($languages);
-            dump($selected_languages);
+                ->orderBy('category')->pluck('subcategory', 'user_inputs.id')->toArray();
+            /*dump($languages);
+            dump($selected_languages);*/
             return view('job.edit', ['job' => $job, 'hourly_rates'=> $rates, 'education_levels' => $education_level,
                 'languages' => $languages, 'selected_languages' => $selected_languages]);
         }
@@ -163,6 +162,18 @@ class JobController extends Controller
             $job->hourly_rate_id = $request->get('hourly_rate_id');
             $job->education_level_id = $request->get('education_level_id');
             $job->save();
+            $languages = $request->get('language_ids');
+            if($languages != null){
+                //delete all languages associated with job
+                LanguageJob::where('job_id',$id)->delete();
+                //add selected languages
+                foreach ($languages as $key => $val) {
+                    $lang = new LanguageJob();
+                    $lang->setAttribute('job_id', $job->getAttribute("id"));
+                    $lang->setAttribute('language_id', $val);
+                    $lang->save();
+                }
+            }
             return $this->getMyJobs();
         }
         return $this->getMyJobs();
