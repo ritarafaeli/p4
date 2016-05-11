@@ -196,6 +196,7 @@ class JobController extends Controller
             ->leftJoin('users', 'guardians.user_id', '=', 'users.id')
             ->first();
         if($job !== null) {
+            LanguageJob::where('job_id',$id)->delete();
             $job = Job::find($id);
             $job->delete();
         }
