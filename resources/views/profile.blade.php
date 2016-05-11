@@ -37,6 +37,18 @@
                     </div>
                 </div>
                 <div class='form-group row'>
+                    <label class="col-sm-2 control-label">Age:</label>
+                    <div class="col-sm-10">
+                        <input type='text' name="age" value="{{ old('age', $caregiver->age) }}">
+                    </div>
+                </div>
+                <div class='form-group row'>
+                    <label class="col-sm-2 control-label">Years of Experience:</label>
+                    <div class="col-sm-10">
+                        <input type='text' name="years_experience" value="{{ old('years_experience', $caregiver->years_experience) }}">
+                    </div>
+                </div>
+                <div class='form-group row'>
                     <label class="col-sm-3 control-label">Smoker:
                         <input type='checkbox' name='is_smoker' {{ old('is_smoker', $caregiver->is_smoker) ? 'checked' : ''}}>
                     </label>
@@ -49,6 +61,26 @@
                 <div class='form-group row'>
                     <label class="col-sm-3 control-label">CPR Certified:
                         <input type='checkbox' name='is_cpr_certified' {{ old('is_cpr_certified', $caregiver->is_cpr_certified) ? 'checked' : ''}}>
+                    </label>
+                </div>
+                <div class='form-group row'>
+                    <label class="col-sm-3 control-label">Experienced with Infants:
+                        <input type='checkbox' name='is_experienced_infants' {{ old('is_experienced_infants', $caregiver->is_experienced_infants) ? 'checked' : ''}}>
+                    </label>
+                </div>
+                <div class='form-group row'>
+                    <label class="col-sm-3 control-label">Experienced with Toddlers:
+                        <input type='checkbox' name='is_experienced_toddlers' {{ old('is_experienced_toddlers', $caregiver->is_experienced_toddlers) ? 'checked' : ''}}>
+                    </label>
+                </div>
+                <div class='form-group row'>
+                    <label class="col-sm-3 control-label">Experienced with Preschoolers:
+                        <input type='checkbox' name='is_experienced_preschoolers' {{ old('is_experienced_preschoolers', $caregiver->is_experienced_preschoolers) ? 'checked' : ''}}>
+                    </label>
+                </div>
+                <div class='form-group row'>
+                    <label class="col-sm-3 control-label">Experienced with Special Needs:
+                        <input type='checkbox' name='is_experienced_specialneeds' {{ old('is_experienced_specialneeds', $caregiver->is_experienced_specialneeds) ? 'checked' : ''}}>
                     </label>
                 </div>
                 <div class='form-group row'>

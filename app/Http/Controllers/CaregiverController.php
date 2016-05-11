@@ -70,14 +70,22 @@ class CaregiverController extends Controller
         if ($user && !$user->is_parent) {
             $this->validate($request, [
                 'bio' => 'max:1000',
+                'age' => 'integer|between:16,100',
+                'years_experience' => 'integer|between:0,100',
                 'zip_code' => 'required|regex:/\b\d{5}\b/',
             ]);
             $caregiver = Caregiver::where('user_id', $user->id)->first();
             $caregiver->bio = $request->get('bio');
             $caregiver->zip_code = $request->get('zip_code');
+            $caregiver->age = $request->get('age');
+            $caregiver->years_experience = $request->get('years_experience');
             $caregiver->is_smoker = $request->get('is_smoker') !== null;
             $caregiver->is_driver = $request->get('is_driver') !== null;
             $caregiver->is_cpr_certified = $request->get('is_cpr_certified') !== null;
+            $caregiver->is_experienced_infants = $request->get('is_experienced_infants') !== null;
+            $caregiver->is_experienced_toddlers = $request->get('is_experienced_toddlers') !== null;
+            $caregiver->is_experienced_preschoolers = $request->get('is_experienced_preschoolers') !== null;
+            $caregiver->is_experienced_specialneeds = $request->get('is_experienced_specialneeds') !== null;
             $caregiver->save();
             $languages = $request->get('language_ids');
             if($languages != null){

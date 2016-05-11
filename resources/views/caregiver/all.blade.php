@@ -25,9 +25,21 @@
                                 @endif
                                 <li><i class="fa fa-li fa-child"></i> Will work with up to {{ $value->max_children === 1 ? '1 child' : $value->max_children . ' children'}}.</li>
                                 <li><i class="fa-li fa fa-check-square"></i> Has {{ $value->years_experience === 1 ? '1 year' : $value->years_experience . ' years'}} experience.</li>
-                            @if($value->is_experienced_specialneeds)
-                                <li><i class="fa-li fa fa-check-square"></i> Is experienced with children with special needs.</li>
-                            @endif
+                                @if($value->is_experienced_specialneeds)
+                                    <li><i class="fa-li fa fa-check-square"></i> Is experienced with children with special needs.</li>
+                                @endif
+                                @if($value->is_experienced_infants)
+                                    <li><i class="fa-li fa fa-check-square"></i> Is experienced with infants.</li>
+                                @endif
+                                @if($value->is_experienced_toddlers)
+                                    <li><i class="fa-li fa fa-check-square"></i> Is experienced with toddlers.</li>
+                                @endif
+                                @if($value->is_experienced_preschoolers)
+                                    <li><i class="fa-li fa fa-check-square"></i> Is experienced with preschoolers.</li>
+                                @endif
+                                @if($value->is_smoker)
+                                    <li><i class="fa-li fa fa-check-square"></i> Is a smoker.</li>
+                                @endif
                             </ul>
                         </div>
                         <div class="caregiver-card-features pull-left" role="toolbar">

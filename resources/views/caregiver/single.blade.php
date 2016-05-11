@@ -36,9 +36,9 @@
                         @if($caregiver->is_experienced_preschoolers)
                             <li><i class="fa-li fa fa-check-square"></i> Is experienced with preschoolers.</li>
                         @endif
-                            @if($caregiver->is_smoker)
-                                <li><i class="fa-li fa fa-check-square"></i> Is a smoker.</li>
-                            @endif
+                        @if($caregiver->is_smoker)
+                            <li><i class="fa-li fa fa-check-square"></i> Is a smoker.</li>
+                        @endif
                         </ul>
                     </div>
                     <div class="caregiver-card-features pull-left" role="toolbar">
