@@ -20,6 +20,9 @@
                             <p><b>Bio: </b>{{ $value->bio }}</p>
                             <p><b>Last Login: </b>{{ $value->last_login }}</p>
                             <ul class="fa-ul">
+                                @if($value->hourly_rate !== null)
+                                    <li><i class="fa fa-li fa-usd" aria-hidden="true"></i> Hourly Range is {{ $value->hourly_rate }}.</li>
+                                @endif
                                 @if($value->education_level !== null)
                                     <li><i class="fa-li fa fa-graduation-cap"></i> Completed {{ $value->education_level }}</li>
                                 @endif

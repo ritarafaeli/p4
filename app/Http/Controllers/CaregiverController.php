@@ -24,8 +24,10 @@ class CaregiverController extends Controller
 
     public function index(){
         $caregivers = DB::table('caregivers')
-            ->select('caregivers.*','user_inputs.subcategory as education_level')
-            ->leftJoin('user_inputs', 'caregivers.education_level_id', '=', 'user_inputs.id')->get();
+            ->select('caregivers.*','edu.subcategory as education_level','hly.subcategory as hourly_rate')
+            ->leftJoin('user_inputs as edu', 'caregivers.education_level_id', '=', 'edu.id')
+            ->leftJoin('user_inputs as hly', 'caregivers.hourly_rate_id', '=', 'hly.id')
+            ->get();
         foreach($caregivers as $caregiver) {
             $user = User::find($caregiver->user_id);
             $caregiver->name = $user->name;
@@ -37,13 +39,26 @@ class CaregiverController extends Controller
         return view('caregiver.all')->with('caregivers', $caregivers);
     }
     public function show($id){
-        $caregiver = Caregiver::where('id',$id)->first();
+        $caregiver = DB::table('caregivers')
+            ->select('caregivers.*','edu.subcategory as education_level','hly.subcategory as hourly_rate')
+            ->leftJoin('user_inputs as edu', 'caregivers.education_level_id', '=', 'edu.id')
+            ->leftJoin('user_inputs as hly', 'caregivers.hourly_rate_id', '=', 'hly.id')
+            ->where('caregivers.id',$id)
+            ->first();
+
+        $languages = DB::table('language_caregivers')
+            ->select('user_inputs.subcategory as language')
+            ->leftJoin('caregivers', 'caregivers.id', '=', 'language_caregivers.caregiver_id')
+            ->leftJoin('user_inputs', 'language_caregivers.language_id', '=', 'user_inputs.id')
+            ->where('caregivers.id',$id)
+            ->get();
+        //$caregiver = Caregiver::where('id',$id)->first();
         $user = User::find($caregiver->user_id);
         $caregiver->name = $user->name;
         $caregiver->email = $user->email;
         $caregiver->profile_picture = $user->profile_picture;
         $caregiver->last_login = $user->last_login;
-        return view('caregiver.single')->with('caregiver', $caregiver);
+        return view('caregiver.single', ['caregiver' => $caregiver, 'languages'=> $languages]);
     }
 
     public function edit(){
@@ -86,6 +101,8 @@ class CaregiverController extends Controller
             $caregiver->is_experienced_toddlers = $request->get('is_experienced_toddlers') !== null;
             $caregiver->is_experienced_preschoolers = $request->get('is_experienced_preschoolers') !== null;
             $caregiver->is_experienced_specialneeds = $request->get('is_experienced_specialneeds') !== null;
+            $caregiver->hourly_rate_id = $request->get('hourly_rate_id');
+            $caregiver->education_level_id = $request->get('education_level_id');
             $caregiver->save();
             $languages = $request->get('language_ids');
             if($languages != null){

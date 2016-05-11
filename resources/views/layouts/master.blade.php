@@ -28,7 +28,7 @@
         $("body").tooltip({ selector: '[data-toggle=tooltip]' });
     });
 </script>
-<div class="panel panel-default" ng-controller="mainController">
+<div class="panel panel-default main-panel" ng-controller="mainController">
     <nav class = "navbar navbar-inverse">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#dropdown">

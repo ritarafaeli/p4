@@ -19,7 +19,10 @@
                         <p><b>Bio: </b>{{ $caregiver->bio }}</p>
                         <p><b>Last Login: </b>{{ $caregiver->last_login }}</p>
                         <ul class="fa-ul">
-                        @if($caregiver->education_level !== null)
+                        @if($caregiver->hourly_rate_id !== null)
+                            <li><i class="fa fa-li fa-usd" aria-hidden="true"></i> Hourly Range is {{ $caregiver->hourly_rate }}.</li>
+                        @endif
+                        @if($caregiver->education_level_id !== null)
                             <li><i class="fa-li fa fa-graduation-cap"></i> Completed {{ $caregiver->education_level }}</li>
                         @endif
                             <li><i class="fa fa-li fa-child"></i> Will work with up to {{ $caregiver->max_children === 1 ? '1 child' : $caregiver->max_children . ' children'}}.</li>
@@ -38,6 +41,13 @@
                         @endif
                         @if($caregiver->is_smoker)
                             <li><i class="fa-li fa fa-check-square"></i> Is a smoker.</li>
+                        @endif
+                        @if(isset($languages) && count($languages))
+                            <li><i class="fa-li fa fa-check-square"></i><b>Languages:</b>
+                                @foreach($languages as $language)
+                                    {{ $language->language }}
+                                @endforeach
+                            </li>
                         @endif
                         </ul>
                     </div>

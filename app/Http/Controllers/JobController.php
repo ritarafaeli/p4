@@ -25,9 +25,10 @@ class JobController extends Controller
     }
     public function index(){
         $jobs = DB::table('jobs')
-            ->select('jobs.*','user_inputs.subcategory as education_level', 'users.name as name', 'users.email as email',
+            ->select('jobs.*','edu.subcategory as education_level', 'hly.subcategory as hourly_rate', 'users.name as name', 'users.email as email',
                 'users.profile_picture as profile_picture', 'users.id as user_id')
-            ->leftJoin('user_inputs', 'jobs.education_level_id', '=', 'user_inputs.id')
+            ->leftJoin('user_inputs as edu', 'jobs.education_level_id', '=', 'edu.id')
+            ->leftJoin('user_inputs as hly', 'jobs.hourly_rate_id', '=', 'hly.id')
             ->leftJoin('guardians', 'jobs.parent_id', '=', 'guardians.id')
             ->leftJoin('users', 'guardians.user_id', '=', 'users.id')
             ->get();

@@ -49,6 +49,26 @@
                     </div>
                 </div>
                 <div class='form-group row'>
+                    <label class="col-sm-2 control-label">Education Level</label>
+                    <div class="col-sm-10">
+                        <select class="form-control"  name="education_level_id">
+                            @foreach ($education_levels as $key => $value)
+                                <option value="{{ $key }}" {{ old('education_level_id', $caregiver->education_level_id) === $key ? 'selected' : '' }}>{{ $value }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class='form-group row'>
+                    <label class="col-sm-2 control-label">Hourly Rate</label>
+                    <div class="col-sm-10">
+                        <select class="form-control"  name="hourly_rate_id">
+                            @foreach ($hourly_rates as $key => $value)
+                                <option value="{{ $key }}" {{ old('hourly_rate_id', $caregiver->hourly_rate_id) === $key ? 'selected' : '' }}>{{ $value }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class='form-group row'>
                     <label class="col-sm-3 control-label">Smoker:
                         <input type='checkbox' name='is_smoker' {{ old('is_smoker', $caregiver->is_smoker) ? 'checked' : ''}}>
                     </label>

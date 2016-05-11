@@ -5,16 +5,6 @@
         <div class="pull-left col-md-8">
             <h4><i class="fa fa-list-alt"></i> Jobs</h4>
         </div>
-        <div class="pull-right col-md-4">
-            <form class="form-inline" method='POST' action='/jobs/search'>
-                {!! csrf_field() !!}
-                <div class="form-group input-group margin-bottom-sm">
-                    <span class="input-group-addon"><i class="fa fa-search fa-fw" title="Search All Jobs" data-toggle="tooltip" data-placement="left"></i></span>
-                    <input name='search' class="form-control" type="text" placeholder="Search" value='{{ old('search') }}'>
-                </div>
-                <button type='submit' class='btn btn-default'>Go</button>
-            </form>
-        </div>
     </div>
 @if(isset($jobs))
     @foreach($jobs as $job)
@@ -32,7 +22,7 @@
                         <h4 class="media-heading text-center">{{ $job->title }}</h4>
                         <p><b>Description: </b>{{ $job->description }}</p>
                         <ul class="fa-ul">
-                            <li><i class="fa fa-li fa-usd" aria-hidden="true"></i> Hourly Range is {{ $job->hourly_rate_id }}.</li>
+                            <li><i class="fa fa-li fa-usd" aria-hidden="true"></i> Hourly Range is {{ $job->hourly_rate }}.</li>
                             @if($job->education_level !== null)
                                 <li><i class="fa-li fa fa-graduation-cap"></i> Requires {{ $job->education_level }}.</li>
                             @endif
