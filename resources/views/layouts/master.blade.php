@@ -37,6 +37,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            <img class="navbar-brand" src="assets/img/logo.svg" alt="Find a Babysitter"/>
             <a href="/" class="navbar-brand"><i class="fa fa-home"></i> Home</a>
         </div>
         <div id="dropdown" class="navbar-collapse collapse">

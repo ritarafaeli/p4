@@ -54,7 +54,7 @@ class JobController extends Controller
             'title' => 'required|max:50',
             'description' => 'required|max:500',
             'num_children' => 'required|min:1|max:7',
-            'zip_code' => 'required|integer|max:99999',
+            'zip_code' => 'required|regex:/\b\d{5}\b/',
             'hourly_rate_id' => 'required',
         ]);
         $user = Auth::user();
@@ -127,6 +127,7 @@ class JobController extends Controller
             ->leftJoin('guardians', 'jobs.parent_id', '=', 'guardians.id')
             ->leftJoin('users', 'guardians.user_id', '=', 'users.id')
             ->first();
+        $job->zip_code = sprintf("%05d", $job->zip_code);
         if($job !== null){
             $rates = $this->uic->getHourlyRates();
             $education_level = $this->uic->getEducationLevels();
@@ -135,8 +136,6 @@ class JobController extends Controller
                 ->leftJoin('language_jobs', 'language_jobs.language_id', '=', 'user_inputs.id')
                 ->leftJoin('jobs', 'jobs.id', '=', 'language_jobs.job_id')
                 ->orderBy('category')->pluck('subcategory', 'user_inputs.id')->toArray();
-            /*dump($languages);
-            dump($selected_languages);*/
             return view('job.edit', ['job' => $job, 'hourly_rates'=> $rates, 'education_levels' => $education_level,
                 'languages' => $languages, 'selected_languages' => $selected_languages]);
         }
@@ -148,7 +147,7 @@ class JobController extends Controller
             'title' => 'required|max:50',
             'description' => 'required|max:500',
             'num_children' => 'required|min:1|max:7',
-            'zip_code' => 'required|integer|min:00501|max:99999',
+            'zip_code' => 'required|regex:/\b\d{5}\b/',
             'hourly_rate_id' => 'required',
         ]);
         $job = DB::table('jobs')

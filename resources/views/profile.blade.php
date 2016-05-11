@@ -11,43 +11,48 @@
             });
         });
     </script>
-    @if(count($errors) > 0)
-        <ul class='errors'>
-            @foreach ($errors->all() as $error)
-                <li><span class='fa fa-exclamation-circle'></span> <div class="error">{{ $error }}</div></li>
-            @endforeach
-        </ul>
-    @endif
-    <div class="panel-group panel-primary">
+
+    <div class="panel panel-primary">
         <div class="panel-heading"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> My Profile</div>
         <div class="panel-body">
+        @if(count($errors) > 0)
+            <ul class="fa-ul error">
+                @foreach ($errors->all() as $error)
+                    <li><i class="fa fa-li fa-exclamation-circle" aria-hidden="true"></i>{{ $error }}</li>
+                @endforeach
+            </ul>
+        @endif
             <form method='POST' action='/profile'>
                 {{ csrf_field() }}
                 <div class='form-group row'>
-                    <label>Bio:</label>
-                    <input type='text' name="bio" value="{{ $caregiver->bio or '' }}">
+                    <label class="col-sm-2 control-label">Bio:</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" name='bio' rows="3">{{ old('bio', $caregiver->bio) }}</textarea>
+                    </div>
                 </div>
                 <div class='form-group row'>
-                    <label>ZIP Code:</label>
-                    <input type='text' name="zip_code" value="{{ $caregiver->zip_code or '' }}">
+                    <label class="col-sm-2 control-label">ZIP Code:</label>
+                    <div class="col-sm-10">
+                        <input type='text' name="zip_code" value="{{ old('zip_code', $caregiver->zip_code) }}">
+                    </div>
                 </div>
                 <div class='form-group row'>
-                    <label>Smoker:
-                        <input type='checkbox' name='is_smoker' {{ $caregiver->is_smoker ? 'checked' : ''}}>
+                    <label class="col-sm-3 control-label">Smoker:
+                        <input type='checkbox' name='is_smoker' {{ old('is_smoker', $caregiver->is_smoker) ? 'checked' : ''}}>
                     </label>
                 </div>
                 <div class='form-group row'>
-                    <label>Driver:
-                        <input type='checkbox' name='is_driver' {{ $caregiver->is_driver ? 'checked' : ''}}>
+                    <label class="col-sm-3 control-label">Driver:
+                        <input type='checkbox' name='is_driver' {{ old('is_driver', $caregiver->is_driver) ? 'checked' : ''}}>
                     </label>
                 </div>
                 <div class='form-group row'>
-                    <label>CPR Certified:
-                        <input type='checkbox' name='is_cpr_certified' {{ $caregiver->is_cpr_certified ? 'checked' : ''}} value=" {{ $caregiver->is_cpr_certified}}">
+                    <label class="col-sm-3 control-label">CPR Certified:
+                        <input type='checkbox' name='is_cpr_certified' {{ old('is_cpr_certified', $caregiver->is_cpr_certified) ? 'checked' : ''}}>
                     </label>
                 </div>
                 <div class='form-group row'>
-                    <label class="col-sm-2 control-label" title="What language(s) would you like spoken at home?" data-toggle="tooltip" data-placement="top">Languages</label>
+                    <label class="col-sm-2 control-label" title="What language(s) do you speak fluently?" data-toggle="tooltip" data-placement="top">Languages</label>
                     <div class="col-sm-4">
                         <div class="row">
                             <div class="col-xs-5">

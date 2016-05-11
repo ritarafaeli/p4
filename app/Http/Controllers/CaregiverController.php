@@ -50,6 +50,7 @@ class CaregiverController extends Controller
         $user = Auth::user();
         if ($user && !$user->is_parent) {
             $caregiver = Caregiver::where('user_id',$user->id)->first();
+            $caregiver->zip_code = sprintf("%05d", $caregiver->zip_code);
             if($caregiver !== null) {
                 $rates = $this->uic->getHourlyRates();
                 $education_level = $this->uic->getEducationLevels();
@@ -68,8 +69,8 @@ class CaregiverController extends Controller
         $user = Auth::user();
         if ($user && !$user->is_parent) {
             $this->validate($request, [
-                'bio' => 'max:500',
-                'zip_code' => 'integer|max:99999',
+                'bio' => 'max:1000',
+                'zip_code' => 'required|regex:/\b\d{5}\b/',
             ]);
             $caregiver = Caregiver::where('user_id', $user->id)->first();
             $caregiver->bio = $request->get('bio');

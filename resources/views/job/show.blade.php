@@ -42,7 +42,7 @@
                         @endif
                     </div>
                     <div class="card-action-pellet btn-toolbar pull-right" role="toolbar">
-                        <a class="btn-group btn-grey" href="/favorite/{{ $job->user_id }}"><i class="btn-group fa fa-heart"></i></a>
+                        <!--<a class="btn-group btn-grey" href="/favorite/{{ $job->user_id }}"><i class="btn-group fa fa-heart"></i></a>-->
                         <a class="btn-group btn-grey" href="mailto:{{ $job->email }}?Subject='Interested in Babysitter Job'"><i class="btn-group fa fa-envelope"></i></a>
                     </div>
                 </div>

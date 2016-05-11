@@ -10,7 +10,7 @@
         </ul>
     @endif
 
-    <div class="panel-group panel-primary">
+    <div class="panel panel-primary">
         <div class="panel-heading"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> My Account</div>
         <div class="panel-body">
             <form method='POST' action='/account' enctype="multipart/form-data" >
